@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand Design Project — GIMAGRAPHY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Oswald:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            background: #090705;
+            color: #f0e8dd;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .standalone-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 4vw;
+            background: rgba(9,7,5,.78);
+            border-bottom: 1px solid rgba(212,175,55,.09);
+            backdrop-filter: blur(16px);
+        }
+
+        .standalone-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: .72rem;
+            letter-spacing: 3px;
+            color: #f0e8dd;
+        }
+
+        .standalone-brand span { color: #d4af37; }
+
+        .standalone-back {
+            color: #d4af37;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: .62rem;
+            letter-spacing: 1.2px;
+            padding: .65rem 1rem;
+            border: 1px solid rgba(212,175,55,.16);
+            border-radius: 30px;
+            transition: .3s ease;
+        }
+
+        .standalone-back:hover {
+            background: #d4af37;
+            color: #090705;
+        }
+
+        .branding-project-section {
+            position: relative;
+            background: #090705;
+            color: #f0e8dd;
+            padding: 9rem 2rem 5rem;
+            overflow: hidden;
+            border-top: 1px solid rgba(212,175,55,.08);
+        }
+
+        .branding-project-glow {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            top: -260px;
+            right: -220px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212,175,55,.11), transparent 68%);
+            filter: blur(20px);
+            pointer-events: none;
+        }
+
+        .branding-project-grid {
+            position: absolute;
+            inset: 0;
+            opacity: .14;
+            background-image:
+                linear-gradient(rgba(212,175,55,.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212,175,55,.06) 1px, transparent 1px);
+            background-size: 70px 70px;
+            mask-image: linear-gradient(to bottom, black, transparent 88%);
+            pointer-events: none;
+        }
+
+        .branding-project-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .branding-project-header {
+            position: relative;
+            text-align: center;
+            margin-bottom: 3.2rem;
+        }
+
+        .branding-eyebrow,
+        .branding-section-label {
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: .62rem;
+            color: rgba(255,200,87,.65);
+        }
+
+        .branding-project-index {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-family: 'Oswald', sans-serif;
+            font-size: .58rem;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,.25);
+        }
+
+        .branding-project-header h1 {
+            margin: .8rem auto .7rem;
+            max-width: 900px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2rem, 4.5vw, 4rem);
+            line-height: 1.05;
+            letter-spacing: -1.5px;
+            color: #f5eee5;
+            font-weight: 700;
+        }
+
+        .branding-project-header h1 span { color: #d4af37; }
+
+        .branding-project-meta {
+            margin: 0;
+            color: #9e8f7c;
+            font-size: .78rem;
+            letter-spacing: 1px;
+        }
+
+        .branding-project-hero {
+            display: grid;
+            grid-template-columns: 1.12fr .88fr;
+            gap: 3.5rem;
+            align-items: center;
+            margin-bottom: 3.2rem;
+        }
+
+        .branding-project-image-wrap {
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+            min-height: 390px;
+            background: #14100c;
+            border: 1px solid rgba(212,175,55,.13);
+            box-shadow: 0 35px 90px rgba(0,0,0,.45), 0 0 70px rgba(212,175,55,.04);
+        }
+
+        .branding-project-image-wrap::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(212,175,55,.08), transparent 45%, rgba(0,0,0,.28));
+            pointer-events: none;
+        }
+
+        .branding-project-image-wrap img {
+            width: 100%;
+            height: 100%;
+            min-height: 390px;
+            object-fit: cover;
+            display: block;
+            transition: transform .8s ease;
+        }
+
+        .branding-project-image-wrap:hover img { transform: scale(1.025); }
+
+        .branding-image-label {
+            position: absolute;
+            left: 18px;
+            bottom: 18px;
+            z-index: 3;
+            padding: 8px 14px;
+            border-radius: 30px;
+            background: rgba(10,8,6,.72);
+            border: 1px solid rgba(212,175,55,.16);
+            backdrop-filter: blur(10px);
+            font-family: 'Montserrat', sans-serif;
+            font-size: .55rem;
+            letter-spacing: 1.5px;
+            color: #e6c280;
+        }
+
+        .branding-project-intro p,
+        .branding-content-card p,
+        .branding-impact-text p {
+            font-size: .86rem;
+            font-weight: 300;
+            line-height: 1.9;
+            color: #c7bdb1;
+            margin: 1rem 0 0;
+        }
+
+        .branding-project-intro strong,
+        .branding-content-card strong {
+            color: #e6c280;
+            font-weight: 500;
+        }
+
+        .branding-project-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .branding-content-card,
+        .branding-impact-card {
+            position: relative;
+            background: linear-gradient(145deg, rgba(24,19,14,.82), rgba(13,10,8,.68));
+            border: 1px solid rgba(212,175,55,.08);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 55px rgba(0,0,0,.24);
+            backdrop-filter: blur(14px);
+        }
+
+        .branding-feature-list {
+            margin: 1.2rem 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .branding-feature-list li {
+            position: relative;
+            padding: .65rem 0 .65rem 1.45rem;
+            border-bottom: 1px solid rgba(212,175,55,.055);
+            font-size: .78rem;
+            line-height: 1.65;
+            color: #d1c6b9;
+        }
+
+        .branding-feature-list li:last-child { border-bottom: none; }
+
+        .branding-feature-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            top: .7rem;
+            color: #d4af37;
+            font-size: .62rem;
+        }
+
+        .branding-tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .55rem;
+            margin-top: 1.3rem;
+        }
+
+        .branding-tool {
+            padding: .55rem .75rem;
+            border-radius: 30px;
+            border: 1px solid rgba(212,175,55,.12);
+            background: rgba(212,175,55,.035);
+            color: #d8c7b0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: .58rem;
+            letter-spacing: .6px;
+        }
+
+        .branding-impact-card {
+            display: grid;
+            grid-template-columns: .7fr 1.3fr;
+            gap: 3rem;
+            margin-top: 1.5rem;
+            border-color: rgba(212,175,55,.12);
+        }
+
+        .branding-impact-card h2 {
+            margin: .9rem 0 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.25rem, 2.2vw, 2rem);
+            line-height: 1.25;
+            color: #f0e8dd;
+        }
+
+        .branding-impact-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: .8rem;
+            margin-top: 1.4rem;
+        }
+
+        .branding-stat {
+            padding: 1rem;
+            border-radius: 14px;
+            background: rgba(212,175,55,.045);
+            border: 1px solid rgba(212,175,55,.08);
+        }
+
+        .branding-stat strong {
+            display: block;
+            color: #e6c280;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.15rem;
+        }
+
+        .branding-stat span {
+            display: block;
+            margin-top: .3rem;
+            color: #8f8171;
+            font-size: .58rem;
+            line-height: 1.5;
+        }
+
+        .branding-project-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 2.5rem;
+            padding-top: 1.4rem;
+            border-top: 1px solid rgba(212,175,55,.08);
+        }
+
+        .branding-project-footer > span {
+            font-family: 'Montserrat', sans-serif;
+            font-size: .5rem;
+            letter-spacing: 2px;
+            color: #6f6253;
+        }
+
+        .branding-back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .65rem 1.15rem;
+            border: 1px solid rgba(212,175,55,.14);
+            border-radius: 30px;
+            color: #d4af37;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: .6rem;
+            letter-spacing: 1px;
+            transition: .3s ease;
+            background: rgba(212,175,55,.025);
+        }
+
+        .branding-back-btn:hover {
+            background: #d4af37;
+            color: #0a0806;
+            border-color: #d4af37;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 900px) {
+            .branding-project-hero,
+            .branding-project-content,
+            .branding-impact-card {
+                grid-template-columns: 1fr;
+            }
+
+            .branding-project-image-wrap,
+            .branding-project-image-wrap img {
+                min-height: 320px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .branding-project-section { padding: 7rem 1rem 3rem; }
+            .branding-project-index {
+                position: static;
+                margin-top: .8rem;
+            }
+            .branding-project-header h1 { font-size: 2rem; }
+            .branding-project-meta { font-size: .65rem; line-height: 1.7; }
+            .branding-project-hero { gap: 1.7rem; }
+            .branding-project-image-wrap,
+            .branding-project-image-wrap img { min-height: 250px; }
+            .branding-content-card,
+            .branding-impact-card { padding: 1.3rem; }
+            .branding-project-footer {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+            .branding-impact-stats { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="standalone-nav">
+        <div class="standalone-brand">GIMAVERS <span>/ GIMAGRAPHY</span></div>
+        <a href="final.html" class="standalone-back">← Back to Portfolio</a>
+    </nav>
+
+    <section class="branding-project-section" id="branding-project">
+        <div class="branding-project-glow"></div>
+        <div class="branding-project-grid"></div>
+
+        <div class="branding-project-container">
+            <div class="branding-project-header">
+                <span class="branding-eyebrow">GIMAGRAPHY / COMMUNITY PROJECT</span>
+                <div class="branding-project-index">PROJECT 06</div>
+                <h1 id="brandingProjectTitle">Brand Design <span>Project</span></h1>
+                <p class="branding-project-meta">Community Empowerment Initiative · Dimbulagala Divisional Secretariat · 2023</p>
+            </div>
+
+            <div class="branding-project-hero">
+                <div class="branding-project-image-wrap">
+                    <img src="assets/agofficebranding.webp"
+                         alt="Brand Design Project for local entrepreneurs under the Dimbulagala Divisional Secretariat"
+                         loading="eager">
+                    <div class="branding-image-label">GIMAGRAPHY — Strategic Brand Development</div>
+                </div>
+
+                <div class="branding-project-intro">
+                    <span class="branding-section-label">01 / OVERVIEW</span>
+                    <p>
+                        In 2023, under the patronage of the <strong>Dimbulagala Divisional Secretariat</strong>,
+                        I led a large-scale Brand Design Project as part of a community empowerment programme.
+                        The initiative focused on supporting selected local entrepreneurs and small businesses
+                        by providing complete professional branding solutions that would help them establish a
+                        strong visual identity and compete more effectively in both physical and digital markets.
+                    </p>
+                    <p>
+                        Operating through <strong>GIMAGRAPHY</strong>, the project delivered end-to-end brand
+                        development services to more than <strong>25 carefully selected businesses</strong>.
+                        Many participants were newly established or in the early stages of formalising their
+                        operations and lacked professional branding assets.
+                    </p>
+                </div>
+            </div>
+
+            <div class="branding-project-content">
+                <article class="branding-content-card">
+                    <span class="branding-section-label">02 / SCOPE OF WORK</span>
+                    <p>
+                        Each participating business received a comprehensive branding package designed to create
+                        a cohesive, practical, and market-ready visual presence.
+                    </p>
+                    <ul class="branding-feature-list">
+                        <li>Custom logo design and complete brand identity systems</li>
+                        <li>Product label and packaging design for food and spice-based products</li>
+                        <li>Business card design and supporting promotional materials</li>
+                        <li>Facebook page design and social media visual templates</li>
+                        <li>Creative direction and consultation for brand consistency</li>
+                    </ul>
+                </article>
+
+                <article class="branding-content-card">
+                    <span class="branding-section-label">03 / APPROACH &amp; TOOLS</span>
+                    <p>
+                        Each brand was developed around the nature of the business, local market preferences,
+                        and the need for clear, professional communication. The approach balanced
+                        <strong>cultural relevance with modern visual standards</strong> so that the brands
+                        could feel authentic to Sri Lankan consumers while remaining polished and trustworthy.
+                    </p>
+                    <div class="branding-tools">
+                        <span class="branding-tool">Adobe Photoshop</span>
+                        <span class="branding-tool">Adobe Illustrator</span>
+                        <span class="branding-tool">Adobe InDesign</span>
+                        <span class="branding-tool">Canva</span>
+                    </div>
+                </article>
+            </div>
+
+            <article class="branding-impact-card">
+                <div>
+                    <span class="branding-section-label">04 / PROJECT IMPACT</span>
+                    <h2>Turning local business ideas into recognisable, trustworthy brands.</h2>
+
+                    <div class="branding-impact-stats">
+                        <div class="branding-stat">
+                            <strong>25+</strong>
+                            <span>Local businesses directly supported</span>
+                        </div>
+                        <div class="branding-stat">
+                            <strong>20+</strong>
+                            <span>Distinct brand identities and asset systems created</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="branding-impact-text">
+                    <p>
+                        The initiative directly supported over <strong>25 local businesses</strong>, resulting
+                        in the creation of more than <strong>20 distinct brand identities</strong> and associated
+                        assets. Participants gained professional visual systems that helped them appear more
+                        credible to customers, improve product presentation, and build stronger recognition
+                        both offline and online.
+                    </p>
+                    <p>
+                        By providing these foundational branding elements free of commercial barriers, the project
+                        contributed to tangible improvements in market presence for emerging entrepreneurs in the
+                        Dimbulagala area.
+                    </p>
+                    <p>
+                        This project stands as one of the more substantial community-focused branding efforts I
+                        have undertaken, demonstrating the power of strategic design in turning local business
+                        ideas into recognisable and trustworthy brands.
+                    </p>
+                </div>
+            </article>
+
+            <div class="branding-project-footer">
+                <span>GIMAGRAPHY · BRAND DESIGN · COMMUNITY EMPOWERMENT</span>
+                <a href="final.html" class="branding-back-btn">
+                    <span>←</span> Back to Projects
+                </a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Management Workshop — GIMAGRAPHY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Oswald:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            background: #090705;
+            color: #f0e8dd;
+            font-family: 'Inter', sans-serif;
+        }
+        .standalone-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 4vw;
+            background: rgba(9,7,5,.78);
+            border-bottom: 1px solid rgba(212,175,55,.09);
+            backdrop-filter: blur(16px);
+        }
+        .standalone-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: .72rem;
+            letter-spacing: 3px;
+            color: #f0e8dd;
+        }
+        .standalone-brand span { color: #d4af37; }
+        .standalone-back {
+            color: #d4af37;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: .62rem;
+            letter-spacing: 1.2px;
+            padding: .65rem 1rem;
+            border: 1px solid rgba(212,175,55,.16);
+            border-radius: 30px;
+            transition: .3s ease;
+        }
+        .standalone-back:hover {
+            background: #d4af37;
+            color: #090705;
+        }
+        .agoffice-project-section {
+            padding-top: 9rem;
+        }
+                /* =========================================================
+           ADDED — GIMAGRAPHY PROJECT DETAIL SECTION
+           ========================================================= */
+        .agoffice-project-section {
+            position: relative;
+            background: #090705;
+            color: #f0e8dd;
+            padding: 7rem 2rem 5rem;
+            overflow: hidden;
+            border-top: 1px solid rgba(212, 175, 55, 0.08);
+            scroll-margin-top: 20px;
+        }
+
+        .agoffice-project-glow {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            top: -260px;
+            right: -220px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.11), transparent 68%);
+            filter: blur(20px);
+            pointer-events: none;
+        }
+
+        .agoffice-project-grid {
+            position: absolute;
+            inset: 0;
+            opacity: 0.14;
+            background-image:
+                linear-gradient(rgba(212,175,55,0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212,175,55,0.06) 1px, transparent 1px);
+            background-size: 70px 70px;
+            mask-image: linear-gradient(to bottom, black, transparent 88%);
+            pointer-events: none;
+        }
+
+        .agoffice-project-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .agoffice-project-header {
+            position: relative;
+            text-align: center;
+            margin-bottom: 3.2rem;
+        }
+
+        .agoffice-eyebrow,
+        .agoffice-section-label {
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.62rem;
+            color: rgba(255, 200, 87, 0.65);
+        }
+
+        .agoffice-project-index {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.58rem;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.25);
+        }
+
+        .agoffice-project-header h2 {
+            margin: 0.8rem auto 0.7rem;
+            max-width: 900px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2rem, 4.5vw, 4rem);
+            line-height: 1.05;
+            letter-spacing: -1.5px;
+            color: #f5eee5;
+            font-weight: 700;
+        }
+
+        .agoffice-project-header h2 span {
+            color: #d4af37;
+        }
+
+        .agoffice-project-meta {
+            margin: 0;
+            color: #9e8f7c;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 1px;
+        }
+
+        .agoffice-project-hero {
+            display: grid;
+            grid-template-columns: 1.12fr 0.88fr;
+            gap: 3.5rem;
+            align-items: center;
+            margin-bottom: 3.2rem;
+        }
+
+        .agoffice-project-image-wrap {
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+            min-height: 390px;
+            background: #14100c;
+            border: 1px solid rgba(212,175,55,0.13);
+            box-shadow: 0 35px 90px rgba(0,0,0,0.45), 0 0 70px rgba(212,175,55,0.04);
+        }
+
+        .agoffice-project-image-wrap::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(212,175,55,0.08), transparent 45%, rgba(0,0,0,0.28));
+            pointer-events: none;
+        }
+
+        .agoffice-project-image-wrap img {
+            width: 100%;
+            height: 100%;
+            min-height: 390px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.8s ease;
+        }
+
+        .agoffice-project-image-wrap:hover img {
+            transform: scale(1.025);
+        }
+
+        .agoffice-image-label {
+            position: absolute;
+            left: 18px;
+            bottom: 18px;
+            z-index: 3;
+            padding: 8px 14px;
+            border-radius: 30px;
+            background: rgba(10,8,6,0.72);
+            border: 1px solid rgba(212,175,55,0.16);
+            backdrop-filter: blur(10px);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.55rem;
+            letter-spacing: 1.5px;
+            color: #e6c280;
+        }
+
+        .agoffice-project-intro {
+            padding-right: 0.5rem;
+        }
+
+        .agoffice-project-intro p,
+        .agoffice-content-card p,
+        .agoffice-impact-text p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.86rem;
+            font-weight: 300;
+            line-height: 1.9;
+            color: #c7bdb1;
+            margin: 1rem 0 0;
+        }
+
+        .agoffice-project-intro strong,
+        .agoffice-content-card strong {
+            color: #e6c280;
+            font-weight: 500;
+        }
+
+        .agoffice-project-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .agoffice-content-card,
+        .agoffice-impact-card {
+            position: relative;
+            background: linear-gradient(145deg, rgba(24,19,14,0.82), rgba(13,10,8,0.68));
+            border: 1px solid rgba(212,175,55,0.08);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 55px rgba(0,0,0,0.24);
+            backdrop-filter: blur(14px);
+        }
+
+        .agoffice-feature-list {
+            margin: 1.2rem 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .agoffice-feature-list li {
+            position: relative;
+            padding: 0.65rem 0 0.65rem 1.45rem;
+            border-bottom: 1px solid rgba(212,175,55,0.055);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            line-height: 1.65;
+            color: #d1c6b9;
+        }
+
+        .agoffice-feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .agoffice-feature-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            top: 0.7rem;
+            color: #d4af37;
+            font-size: 0.62rem;
+        }
+
+        .agoffice-highlight {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            margin-top: 1.4rem;
+            padding: 1rem;
+            border-radius: 14px;
+            background: rgba(212,175,55,0.045);
+            border: 1px solid rgba(212,175,55,0.08);
+        }
+
+        .agoffice-highlight-mark {
+            color: #d4af37;
+            font-size: 1.25rem;
+        }
+
+        .agoffice-highlight strong,
+        .agoffice-highlight span {
+            display: block;
+        }
+
+        .agoffice-highlight strong {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.72rem;
+            color: #eee3d6;
+        }
+
+        .agoffice-highlight span {
+            margin-top: 3px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.62rem;
+            color: #8f8171;
+        }
+
+        .agoffice-impact-card {
+            display: grid;
+            grid-template-columns: 0.7fr 1.3fr;
+            gap: 3rem;
+            margin-top: 1.5rem;
+            border-color: rgba(212,175,55,0.12);
+        }
+
+        .agoffice-impact-card h3 {
+            margin: 0.9rem 0 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.25rem, 2.2vw, 2rem);
+            line-height: 1.25;
+            color: #f0e8dd;
+        }
+
+        .agoffice-impact-text p:first-child {
+            margin-top: 0;
+        }
+
+        .agoffice-project-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 2.5rem;
+            padding-top: 1.4rem;
+            border-top: 1px solid rgba(212,175,55,0.08);
+        }
+
+        .agoffice-project-footer > span {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.5rem;
+            letter-spacing: 2px;
+            color: #6f6253;
+        }
+
+        .agoffice-back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.65rem 1.15rem;
+            border: 1px solid rgba(212,175,55,0.14);
+            border-radius: 30px;
+            color: #d4af37;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 1px;
+            transition: 0.3s ease;
+            background: rgba(212,175,55,0.025);
+        }
+
+        .agoffice-back-btn:hover {
+            background: #d4af37;
+            color: #0a0806;
+            border-color: #d4af37;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 900px) {
+            .agoffice-project-hero,
+            .agoffice-project-content,
+            .agoffice-impact-card {
+                grid-template-columns: 1fr;
+            }
+
+            .agoffice-project-image-wrap,
+            .agoffice-project-image-wrap img {
+                min-height: 320px;
+            }
+
+            .agoffice-impact-card {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .agoffice-project-section {
+                padding: 4.5rem 1rem 3rem;
+            }
+
+            .agoffice-project-index {
+                position: static;
+                margin-top: 0.8rem;
+            }
+
+            .agoffice-project-header h2 {
+                font-size: 2rem;
+            }
+
+            .agoffice-project-meta {
+                font-size: 0.65rem;
+                line-height: 1.7;
+            }
+
+            .agoffice-project-hero {
+                gap: 1.7rem;
+            }
+
+            .agoffice-project-image-wrap,
+            .agoffice-project-image-wrap img {
+                min-height: 250px;
+            }
+
+            .agoffice-content-card,
+            .agoffice-impact-card {
+                padding: 1.3rem;
+            }
+
+            .agoffice-project-footer {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <!-- EDITED: Standalone project page for the GIMAGRAPHY workshop. -->
+    <nav class="standalone-nav">
+        <div class="standalone-brand">GIMAVERS <span>/ GIMAGRAPHY</span></div>
+        <a href="lastt_qr_fixed_QR_cards_adjusted(5).html" class="standalone-back">← Back to Portfolio</a>
+    </nav>
+
+    <section class="agoffice-project-section" id="agoffice-project" aria-labelledby="agofficeProjectTitle">
+        <div class="agoffice-project-glow"></div>
+        <div class="agoffice-project-grid"></div>
+
+        <div class="agoffice-project-container">
+            <div class="agoffice-project-header">
+                <span class="agoffice-eyebrow">GIMAGRAPHY / COMMUNITY PROJECT</span>
+                <div class="agoffice-project-index">PROJECT 05</div>
+                <h2 id="agofficeProjectTitle">Social Media Management <span>Workshop &amp; Project</span></h2>
+                <p class="agoffice-project-meta">Community Empowerment Project · Dibulagala Divisional Secretariat · 22 October 2024</p>
+            </div>
+
+            <div class="agoffice-project-hero">
+                <div class="agoffice-project-image-wrap">
+                    <img src="assets/agofficeprogramme.webp"
+                         alt="Social Media Management Workshop at Dibulagala Divisional Secretariat"
+                         loading="lazy">
+                    <div class="agoffice-image-label">GIMAGRAPHY — It’s Time to Marketing</div>
+                </div>
+
+                <div class="agoffice-project-intro">
+                    <span class="agoffice-section-label">01 / OVERVIEW</span>
+                    <p>
+                        In October 2024, I had the opportunity to design and facilitate a comprehensive
+                        Social Media Management Workshop under the Community Empowerment Project organised
+                        by the Dibulagala Divisional Secretariat. The session was held on 22 October 2024
+                        at the Divisional Secretariat premises and formed part of a broader initiative aimed
+                        at strengthening local entrepreneurship through practical digital skills.
+                    </p>
+                    <p>
+                        Operating under the identity <strong>GIMAGRAPHY – It’s Time to Marketing</strong>,
+                        the workshop was specifically created for individuals who had recently started
+                        businesses or were preparing to launch their own ventures. Many participants had
+                        limited prior exposure to professional social media practices, so the programme was
+                        structured to begin from foundational concepts and progressively build practical competence.
+                    </p>
+                </div>
+            </div>
+
+            <div class="agoffice-project-content">
+                <article class="agoffice-content-card">
+                    <span class="agoffice-section-label">02 / PROGRAMME FOCUS &amp; CONTENT</span>
+                    <p>
+                        The workshop covered a complete introductory-to-intermediate pathway in social media
+                        management, with particular emphasis on platforms and strategies relevant to the
+                        Sri Lankan market. Key modules included:
+                    </p>
+                    <ul class="agoffice-feature-list">
+                        <li>Setting up and optimising Facebook Business Pages for professional use</li>
+                        <li>Developing coherent social media strategies aligned with business goals</li>
+                        <li>Content planning, calendar creation, and consistent posting approaches</li>
+                        <li>Techniques for genuine audience engagement and community building</li>
+                        <li>Practical methods for growing online visibility and converting attention into business results</li>
+                    </ul>
+                    <p>
+                        Live demonstrations, real-time platform walkthroughs, and guided discussions formed
+                        the core of the delivery style, ensuring participants could immediately apply what
+                        they learned to their own businesses.
+                    </p>
+                </article>
+
+                <article class="agoffice-content-card">
+                    <span class="agoffice-section-label">03 / COLLABORATION &amp; SUPPORT</span>
+                    <p>
+                        The success of the programme was significantly supported by the cooperation and
+                        hospitality of the Dibulagala Divisional Secretariat staff. Special appreciation
+                        is due to <strong>Manjula Jayawardena and the team</strong>, whose organisational
+                        assistance, venue arrangements, and warm facilitation created a productive and
+                        welcoming environment for all participants.
+                    </p>
+
+                    <div class="agoffice-highlight">
+                        <span class="agoffice-highlight-mark">✦</span>
+                        <div>
+                            <strong>Dibulagala Divisional Secretariat</strong>
+                            <span>Community Empowerment Project</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <article class="agoffice-impact-card">
+                <div>
+                    <span class="agoffice-section-label">04 / IMPACT &amp; INTENT</span>
+                    <h3>From one-day training to a practical digital foundation.</h3>
+                </div>
+                <div class="agoffice-impact-text">
+                    <p>
+                        This initiative was designed not merely as a one-day training session, but as a
+                        practical foundation that local entrepreneurs could continue building upon independently.
+                        By focusing on realistic, locally relevant strategies rather than abstract theory,
+                        the workshop aimed to help participants develop a stronger digital presence, increase
+                        meaningful engagement, and ultimately turn social media into a sustainable growth
+                        channel for their businesses.
+                    </p>
+                    <p>
+                        The project reflects my ongoing commitment to community-level capacity building,
+                        digital literacy, and the empowerment of emerging entrepreneurs through accessible,
+                        hands-on marketing education.
+                    </p>
+                </div>
+            </article>
+
+            <div class="agoffice-project-footer">
+                <span>GIMAGRAPHY · SOCIAL MEDIA MANAGEMENT · COMMUNITY EMPOWERMENT</span>
+                <a href="#projectSection" class="agoffice-back-btn">
+                    <span>←</span> Back to Projects
+                </a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

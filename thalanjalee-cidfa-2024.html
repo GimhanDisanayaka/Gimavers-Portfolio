@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thalanjalee Dancing Academy — CIDFA 2024 | GIMAGRAPHY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Oswald:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *{box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{
+            margin:0;
+            background:#050505;
+            color:#f2eee8;
+            font-family:'Inter',sans-serif;
+        }
+        .nav{
+            position:fixed;
+            top:0;left:0;right:0;
+            z-index:100;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:1rem 4vw;
+            background:rgba(5,5,5,.84);
+            border-bottom:1px solid rgba(255,255,255,.07);
+            backdrop-filter:blur(18px);
+        }
+        .brand{
+            font-family:'Montserrat',sans-serif;
+            font-weight:700;
+            font-size:.72rem;
+            letter-spacing:3px;
+        }
+        .brand span{color:#d4af37}
+        .back{
+            color:#ddd;
+            text-decoration:none;
+            font-family:'Montserrat',sans-serif;
+            font-size:.6rem;
+            letter-spacing:1.4px;
+            padding:.65rem 1rem;
+            border:1px solid rgba(255,255,255,.12);
+            border-radius:30px;
+            transition:.3s ease;
+        }
+        .back:hover{background:#d4af37;color:#050505}
+        .project{
+            position:relative;
+            min-height:100vh;
+            padding:9rem 2rem 5rem;
+            overflow:hidden;
+            background:
+                radial-gradient(circle at 82% 10%,rgba(212,175,55,.08),transparent 28%),
+                radial-gradient(circle at 12% 45%,rgba(212,175,55,.035),transparent 30%),
+                #050505;
+        }
+        .project::before{
+            content:'';
+            position:absolute;
+            inset:0;
+            opacity:.12;
+            background-image:
+                linear-gradient(rgba(212,175,55,.055) 1px,transparent 1px),
+                linear-gradient(90deg,rgba(212,175,55,.055) 1px,transparent 1px);
+            background-size:72px 72px;
+            mask-image:linear-gradient(to bottom,#000,transparent 90%);
+            pointer-events:none;
+        }
+        .container{position:relative;z-index:2;max-width:1180px;margin:auto}
+        .header{text-align:center;margin-bottom:3.2rem}
+        .eyebrow,.label{
+            display:inline-block;
+            text-transform:uppercase;
+            font-family:'Montserrat',sans-serif;
+            letter-spacing:4px;
+            font-size:.6rem;
+            color:#c6a34a;
+        }
+        .header h1{
+            margin:.85rem auto .8rem;
+            max-width:1000px;
+            font-family:'Montserrat',sans-serif;
+            font-size:clamp(2rem,4.5vw,4.2rem);
+            line-height:1.04;
+            letter-spacing:-1.7px;
+            color:#f5f2ed;
+        }
+        .header h1 span{color:#d4af37}
+        .meta{margin:0;color:#8d8d8d;font-size:.75rem;letter-spacing:1px}
+        .hero{
+            display:grid;
+            grid-template-columns:1.12fr .88fr;
+            gap:3.5rem;
+            align-items:center;
+            margin-bottom:1.5rem;
+        }
+        .image-wrap{
+            position:relative;
+            overflow:hidden;
+            min-height:430px;
+            border-radius:24px;
+            background:#0b0b0b;
+            border:1px solid rgba(212,175,55,.15);
+            box-shadow:0 35px 100px rgba(0,0,0,.62),0 0 70px rgba(212,175,55,.04);
+        }
+        .image-wrap img{
+            width:100%;
+            height:100%;
+            min-height:430px;
+            display:block;
+            object-fit:cover;
+            filter:saturate(.9) contrast(1.05);
+            transition:transform .8s ease,filter .8s ease;
+        }
+        .image-wrap:hover img{transform:scale(1.025);filter:saturate(1) contrast(1.08)}
+        .image-wrap::after{
+            content:'';
+            position:absolute;
+            inset:0;
+            background:linear-gradient(135deg,rgba(212,175,55,.08),transparent 42%,rgba(0,0,0,.45));
+            pointer-events:none;
+        }
+        .image-tag{
+            position:absolute;
+            left:18px;
+            bottom:18px;
+            z-index:3;
+            padding:8px 14px;
+            border-radius:30px;
+            background:rgba(5,5,5,.72);
+            border:1px solid rgba(212,175,55,.16);
+            backdrop-filter:blur(12px);
+            font-family:'Montserrat',sans-serif;
+            font-size:.52rem;
+            letter-spacing:1.4px;
+            color:#e6c280;
+        }
+        .intro p,.card p,.impact p{
+            margin:1rem 0 0;
+            color:#b7b2ab;
+            font-size:.84rem;
+            font-weight:300;
+            line-height:1.9;
+        }
+        .intro strong,.card strong,.impact strong{color:#e6c280;font-weight:500}
+        .cards{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+        .card,.impact{
+            background:linear-gradient(145deg,rgba(18,15,10,.94),rgba(8,8,8,.84));
+            border:1px solid rgba(212,175,55,.09);
+            border-radius:20px;
+            padding:2rem;
+            box-shadow:0 22px 65px rgba(0,0,0,.3);
+            backdrop-filter:blur(14px);
+        }
+        .list{list-style:none;padding:0;margin:1.2rem 0 0}
+        .list li{
+            position:relative;
+            padding:.72rem 0 .72rem 1.4rem;
+            border-bottom:1px solid rgba(212,175,55,.055);
+            color:#c8c3bc;
+            font-size:.76rem;
+            line-height:1.65;
+        }
+        .list li:last-child{border-bottom:0}
+        .list li::before{
+            content:'✦';
+            position:absolute;
+            left:0;
+            top:.75rem;
+            color:#d4af37;
+            font-size:.6rem;
+        }
+        .impact{
+            margin-top:1.5rem;
+            display:grid;
+            grid-template-columns:.72fr 1.28fr;
+            gap:3rem;
+        }
+        .impact h2{
+            margin:.9rem 0 0;
+            font-family:'Montserrat',sans-serif;
+            font-size:clamp(1.3rem,2.3vw,2.05rem);
+            line-height:1.25;
+            color:#f0ede8;
+        }
+        .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;margin-top:1.4rem}
+        .stat{
+            padding:1rem;
+            border-radius:14px;
+            background:rgba(212,175,55,.035);
+            border:1px solid rgba(212,175,55,.08);
+        }
+        .stat strong{
+            display:block;
+            font-family:'Montserrat',sans-serif;
+            font-size:1.2rem;
+            color:#eeeae4;
+        }
+        .stat span{
+            display:block;
+            margin-top:.3rem;
+            color:#85817c;
+            font-size:.56rem;
+            line-height:1.5;
+        }
+        .awards{
+            margin-top:1rem;
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:.7rem;
+        }
+        .award{
+            padding:.9rem 1rem;
+            border-radius:12px;
+            background:rgba(212,175,55,.035);
+            border:1px solid rgba(212,175,55,.08);
+            color:#cfc8be;
+            font-size:.7rem;
+            line-height:1.55;
+        }
+        .award strong{display:block;color:#e6c280;margin-bottom:.2rem}
+        .footer{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:1rem;
+            margin-top:2.5rem;
+            padding-top:1.4rem;
+            border-top:1px solid rgba(212,175,55,.08);
+        }
+        .footer span{
+            font-family:'Montserrat',sans-serif;
+            font-size:.48rem;
+            letter-spacing:2px;
+            color:#66635f;
+        }
+        .footer a{
+            color:#d4af37;
+            text-decoration:none;
+            font-family:'Montserrat',sans-serif;
+            font-size:.58rem;
+            letter-spacing:1px;
+            padding:.65rem 1.1rem;
+            border:1px solid rgba(212,175,55,.14);
+            border-radius:30px;
+            transition:.3s ease;
+        }
+        .footer a:hover{background:#d4af37;color:#050505}
+        @media(max-width:900px){
+            .hero,.cards,.impact{grid-template-columns:1fr}
+            .image-wrap,.image-wrap img{min-height:320px}
+        }
+        @media(max-width:600px){
+            .project{padding:7rem 1rem 3rem}
+            .header h1{font-size:2rem}
+            .meta{font-size:.62rem;line-height:1.7}
+            .card,.impact{padding:1.3rem}
+            .image-wrap,.image-wrap img{min-height:250px}
+            .footer{align-items:flex-start;flex-direction:column}
+            .stats,.awards{grid-template-columns:1fr}
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="brand">GIMAVERS <span>/ GIMAGRAPHY</span></div>
+        <a href="final_updated.html" class="back">← Back to Portfolio</a>
+    </nav>
+
+    <main class="project">
+        <div class="container">
+            <header class="header">
+                <span class="eyebrow">GIMAGRAPHY / DIGITAL CAMPAIGN</span>
+                <h1>Thalanjalee Dancing Academy <span>— CIDFA 2024</span></h1>
+                <p class="meta">Social Media Management · Content Creation · Campaign Strategy</p>
+            </header>
+
+            <section class="hero">
+                <div class="image-wrap">
+                    <img src="assets/thalanjaleecidfa.webp"
+                         alt="Thalanjalee Dancing Academy — Colombo International Dance Festival 2024"
+                         loading="eager">
+                    <div class="image-tag">SOCIAL MEDIA MANAGER &amp; CONTENT CREATOR</div>
+                </div>
+
+                <div class="intro">
+                    <span class="label">01 / PROJECT OVERVIEW</span>
+                    <p>
+                        In 2024, I continued my role as <strong>Social Media Manager and Content Creator</strong>
+                        for Thalanjalee Dancing Academy during their participation in the
+                        <strong>Colombo International Dance Festival (CIDFA)</strong>.
+                    </p>
+                    <p>
+                        This project represented a significant chapter in an ongoing collaboration, where strategic
+                        digital communication played a central role in elevating the academy’s visibility,
+                        strengthening public support, and contributing to notable achievements at one of Sri Lanka’s
+                        prominent national dance platforms.
+                    </p>
+                    <p>
+                        My responsibility was to build and sustain a compelling online presence that amplified the
+                        academy’s journey, engaged audiences, and supported the broader promotional efforts surrounding
+                        the festival.
+                    </p>
+                </div>
+            </section>
+
+            <section class="cards">
+                <article class="card">
+                    <span class="label">02 / SCOPE OF WORK</span>
+                    <ul class="list">
+                        <li><strong>Content &amp; Engagement Strategy</strong> — Developed a focused strategy tailored to the festival timeline.</li>
+                        <li><strong>Promotional Content</strong> — Created high-quality videos and visual assets capturing the energy, skill, and spirit of the academy.</li>
+                        <li><strong>Ongoing Content</strong> — Produced reels, posts, stories, and updates to maintain momentum and audience interest.</li>
+                        <li><strong>Social Media Management</strong> — Managed day-to-day publishing, community interaction, and real-time engagement.</li>
+                        <li><strong>Copywriting</strong> — Crafted culturally respectful, platform-optimised copy for traditional and younger digital audiences.</li>
+                        <li><strong>Campaign Narrative</strong> — Supported a clear, authentic, and compelling story throughout the festival journey.</li>
+                    </ul>
+                </article>
+
+                <article class="card">
+                    <span class="label">03 / FESTIVAL RECOGNITION</span>
+                    <p>
+                        The academy’s efforts were recognised with multiple awards at the
+                        <strong>Colombo International Dance Festival 2024</strong>. The awarding ceremony was held
+                        at Sugathadasa Stadium.
+                    </p>
+                    <div class="awards">
+                        <div class="award"><strong>Best Promotional Video</strong>1st Place</div>
+                        <div class="award"><strong>Most Popular Dance Group</strong>Festival recognition</div>
+                        <div class="award"><strong>Most Popular Dance Teacher</strong>Festival recognition</div>
+                        <div class="award"><strong>Special Achievement</strong>Recognition by CIDFA</div>
+                    </div>
+                    <p>
+                        These results reflected the talent and dedication of the dancers and teachers, together with
+                        the strength of a well-executed digital campaign that helped build visibility and public support.
+                    </p>
+                </article>
+            </section>
+
+            <section class="impact">
+                <div>
+                    <span class="label">04 / CAMPAIGN PERFORMANCE</span>
+                    <h2>Turning cultural storytelling into measurable digital impact.</h2>
+                    <div class="stats">
+                        <div class="stat">
+                            <strong>80+</strong>
+                            <span>Original content pieces created</span>
+                        </div>
+                        <div class="stat">
+                            <strong>150K+</strong>
+                            <span>People reached across platforms</span>
+                        </div>
+                        <div class="stat">
+                            <strong>50K+</strong>
+                            <span>Engagements generated</span>
+                        </div>
+                        <div class="stat">
+                            <strong>4</strong>
+                            <span>Festival recognitions / honours listed above</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <span class="label">05 / PROJECT SIGNIFICANCE</span>
+                    <p>
+                        The digital efforts delivered strong measurable outcomes, with <strong>80+ original content
+                        pieces</strong>, <strong>150K+ people reached</strong>, and <strong>50K+ engagements</strong>
+                        across platforms.
+                    </p>
+                    <p>
+                        This collaboration stands as a clear example of how thoughtful content strategy and consistent
+                        social media management can support cultural institutions in achieving greater recognition.
+                        By combining creative storytelling with disciplined execution, the campaign helped translate
+                        the academy’s on-stage excellence into wider public awareness and tangible festival success.
+                    </p>
+                    <p>
+                        It remains a project I am particularly proud of — bringing together cultural heritage,
+                        performance excellence, and modern digital communication to deliver meaningful results.
+                    </p>
+                </div>
+            </section>
+
+            <footer class="footer">
+                <span>GIMAGRAPHY · SOCIAL MEDIA · CONTENT CREATION · CAMPAIGN STRATEGY</span>
+                <a href="final_updated.html">← Back to Projects</a>
+            </footer>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHAKRA – Smart AI Study Assistant | GIMAVERS</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Oswald:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:#050608;color:#f3f4f6;font-family:'Inter',sans-serif}
+::selection{background:#fff;color:#050608}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1rem 4vw;background:rgba(5,6,8,.82);border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:blur(20px)}
+.brand{font-family:'Montserrat',sans-serif;font-weight:800;font-size:.7rem;letter-spacing:3px;color:#fff}.brand span{color:#8f949d}
+.back{color:#d9dce1;text-decoration:none;font-family:'Montserrat',sans-serif;font-size:.58rem;letter-spacing:1.5px;padding:.65rem 1rem;border:1px solid rgba(255,255,255,.12);border-radius:30px;transition:.3s}.back:hover{background:#fff;color:#050608}
+.project{position:relative;min-height:100vh;padding:9rem 2rem 5rem;overflow:hidden;background:radial-gradient(circle at 82% 8%,rgba(255,255,255,.075),transparent 25%),radial-gradient(circle at 12% 42%,rgba(255,255,255,.035),transparent 28%),#050608}
+.project:before{content:'';position:absolute;inset:0;opacity:.13;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:72px 72px;mask-image:linear-gradient(to bottom,#000,transparent 90%);pointer-events:none}
+.container{position:relative;z-index:2;max-width:1180px;margin:auto}.header{text-align:center;margin-bottom:3.2rem}
+.eyebrow,.label{display:inline-block;text-transform:uppercase;font-family:'Montserrat',sans-serif;letter-spacing:4px;font-size:.58rem;color:#aeb3bb}
+.header h1{margin:.85rem auto .8rem;max-width:1000px;font-family:'Montserrat',sans-serif;font-size:clamp(2.2rem,5vw,4.6rem);line-height:1.02;letter-spacing:-2px;color:#f7f8fa}.header h1 span{color:#aeb3bb}
+.meta{margin:0 auto;color:#777d87;font-size:.7rem;letter-spacing:1.5px}
+.hero{display:grid;grid-template-columns:1.12fr .88fr;gap:3.5rem;align-items:center;margin-bottom:1.5rem}
+.image-wrap{position:relative;overflow:hidden;min-height:450px;border-radius:26px;background:#090a0d;border:1px solid rgba(255,255,255,.13);box-shadow:0 35px 100px rgba(0,0,0,.62),0 0 70px rgba(255,255,255,.035)}
+.image-wrap img{width:100%;height:100%;min-height:450px;display:block;object-fit:cover;filter:saturate(.9) contrast(1.05);transition:transform .8s ease,filter .8s ease}.image-wrap:hover img{transform:scale(1.025);filter:saturate(1) contrast(1.08)}
+.image-wrap:after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.08),transparent 42%,rgba(0,0,0,.5));pointer-events:none}
+.image-tag{position:absolute;left:18px;bottom:18px;z-index:3;padding:8px 14px;border-radius:30px;background:rgba(5,6,8,.72);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(12px);font-family:'Montserrat',sans-serif;font-size:.5rem;letter-spacing:1.5px;color:#e4e6ea}
+.intro p,.card p,.impact p{margin:1rem 0 0;color:#a9adb5;font-size:.84rem;font-weight:300;line-height:1.9}.intro strong,.card strong,.impact strong{color:#eef0f3;font-weight:600}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}.card,.impact{background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.012));border:1px solid rgba(255,255,255,.085);border-radius:22px;padding:2rem;box-shadow:0 22px 65px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.035);backdrop-filter:blur(14px)}
+.list{list-style:none;padding:0;margin:1.2rem 0 0}.list li{position:relative;padding:.72rem 0 .72rem 1.4rem;border-bottom:1px solid rgba(255,255,255,.055);color:#c5c9d0;font-size:.76rem;line-height:1.65}.list li:last-child{border-bottom:0}.list li:before{content:'✦';position:absolute;left:0;top:.75rem;color:#f1f2f4;font-size:.58rem}
+.impact{margin-top:1.5rem;display:grid;grid-template-columns:.72fr 1.28fr;gap:3rem}.impact h2{margin:.9rem 0 0;font-family:'Montserrat',sans-serif;font-size:clamp(1.35rem,2.4vw,2.15rem);line-height:1.25;color:#f0f1f3}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;margin-top:1.4rem}.stat{padding:1rem;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08)}.stat strong{display:block;font-family:'Montserrat',sans-serif;font-size:1.05rem;color:#f0f1f3}.stat span{display:block;margin-top:.3rem;color:#777d87;font-size:.56rem;line-height:1.5}
+.stack-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;margin-top:1.4rem}.stack-item{padding:1rem;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.075)}.stack-item strong{display:block;color:#f0f1f3;font-size:.75rem;font-family:'Montserrat',sans-serif}.stack-item span{display:block;margin-top:.35rem;color:#7f858f;font-size:.58rem;line-height:1.5}
+.workflow{margin-top:1.5rem;padding:1.7rem;border-radius:22px;border:1px solid rgba(255,255,255,.09);background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.01))}.workflow-row{display:grid;grid-template-columns:repeat(6,1fr);gap:.55rem;margin-top:1.2rem}.workflow-step{min-height:100px;padding:.9rem;border-radius:15px;border:1px solid rgba(255,255,255,.075);background:rgba(255,255,255,.025);display:flex;flex-direction:column;justify-content:space-between}.workflow-step b{font-size:.58rem;color:#fff;letter-spacing:.08em}.workflow-step span{font-size:.55rem;color:#777d87;line-height:1.45}
+.footer{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-top:2.5rem;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.08)}.footer span{font-family:'Montserrat',sans-serif;font-size:.48rem;letter-spacing:2px;color:#5f646d}.footer a{color:#e3e5e8;text-decoration:none;font-family:'Montserrat',sans-serif;font-size:.58rem;letter-spacing:1px;padding:.65rem 1.1rem;border:1px solid rgba(255,255,255,.13);border-radius:30px;transition:.3s}.footer a:hover{background:#fff;color:#050608}
+@media(max-width:900px){.hero,.cards,.impact{grid-template-columns:1fr}.image-wrap,.image-wrap img{min-height:320px}.stack-grid{grid-template-columns:repeat(2,1fr)}.workflow-row{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.project{padding:7rem 1rem 3rem}.header h1{font-size:2rem}.meta{font-size:.6rem;line-height:1.7}.card,.impact,.workflow{padding:1.3rem}.image-wrap,.image-wrap img{min-height:250px}.stats,.stack-grid{grid-template-columns:1fr}.workflow-row{grid-template-columns:1fr 1fr}.footer{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="brand">GIMAVERS <span>/ DEVELOPMENT</span></div><a href="gimavers_portfolio_chakra_updated.html" class="back">← Back to Portfolio</a></nav>
+<main class="project"><div class="container">
+<header class="header"><span class="eyebrow">DEVELOPMENT / ARTIFICIAL INTELLIGENCE / EDTECH</span><h1>CHAKRA <span>– Smart AI Study Assistant</span></h1><p class="meta">Python · Streamlit · AI · NLP · PDF Processing · Interactive Learning</p></header>
+
+<section class="hero">
+<div class="image-wrap"><img src="assets/pdfassit.webp" alt="CHAKRA Smart AI Study Assistant application interface" loading="eager"><div class="image-tag">AI-POWERED PDF → LEARNING WORKFLOW</div></div>
+<div class="intro"><span class="label">01 / PROJECT OVERVIEW</span>
+<p><strong>CHAKRA – Smart AI Study Assistant</strong> is a premium AI-powered educational platform designed to transform the way students interact with educational PDF documents.</p>
+<p>The system combines <strong>Artificial Intelligence, Natural Language Processing, document processing, interactive learning tools, and visual knowledge representation</strong> into one centralized study assistant.</p>
+<p>Its core goal is to reduce the time students spend manually reading, organizing, revising and testing themselves from lengthy educational material.</p>
+<p><strong>Core concept:</strong> Upload → Understand → Generate → Practice → Recall → Improve</p></div>
+</section>
+
+<section class="cards">
+<article class="card"><span class="label">02 / PROBLEM & SOLUTION</span>
+<p>Students often spend significant time turning large educational documents into useful revision resources. Creating short notes, questions, important concepts and organized study material manually can make learning unnecessarily time-consuming.</p>
+<ul class="list">
+<li><strong>Upload</strong> — Bring an educational PDF into one centralized workspace.</li>
+<li><strong>Understand</strong> — Extract and process the document content.</li>
+<li><strong>Generate</strong> — Convert the source into multiple learning formats.</li>
+<li><strong>Practice</strong> — Use quizzes and generated questions for active learning.</li>
+<li><strong>Recall</strong> — Reinforce knowledge with active-recall Q&amp;A.</li>
+<li><strong>Improve</strong> — Adjust generation settings to match the learner's needs.</li>
+</ul></article>
+
+<article class="card"><span class="label">03 / CORE FEATURES</span>
+<ul class="list">
+<li><strong>Structured Short Notes</strong> — Generate organized revision notes from lengthy educational PDFs, with export options such as PDF and PNG.</li>
+<li><strong>Interactive Quiz Master</strong> — AI-generated MCQs with configurable question counts, time per question, countdown timer and instant learning feedback.</li>
+<li><strong>Active Recall Q&amp;A</strong> — Generate question-and-answer pairs for revision, self-testing, exam preparation and concept reinforcement.</li>
+<li><strong>Visual Mind Maps</strong> — Transform important concepts and their relationships into visual knowledge maps with SVG and PNG export support.</li>
+<li><strong>Bilingual Learning</strong> — Support English-to-Sinhala explanations for technical terminology while preserving the meaning of important concepts.</li>
+<li><strong>PDF-Based Workflow</strong> — Centralize notes, quizzes, Q&amp;A, mind maps and translations inside one study environment.</li>
+</ul></article>
+</section>
+
+<section class="impact">
+<div><span class="label">04 / TECHNOLOGY STACK</span><h2>AI capabilities combined with practical Python application development.</h2>
+<div class="stack-grid">
+<div class="stack-item"><strong>Python</strong><span>Primary development language for AI, automation and document processing.</span></div>
+<div class="stack-item"><strong>Streamlit</strong><span>Interactive web application framework and user interface layer.</span></div>
+<div class="stack-item"><strong>AI / NLP</strong><span>Content analysis and generation of meaningful learning resources.</span></div>
+<div class="stack-item"><strong>PDF Processing</strong><span>Educational document extraction and transformation workflow.</span></div>
+</div></div>
+<div><span class="label">05 / USER EXPERIENCE</span>
+<p>CHAKRA was designed around <strong>simplicity and productivity</strong>. Before processing material, users can configure important generation settings instead of receiving a one-size-fits-all result.</p>
+<ul class="list">
+<li><strong>Maximum pages to process</strong> — Control how much source material is analyzed.</li>
+<li><strong>Number of generated items</strong> — Tune the amount of learning content produced.</li>
+<li><strong>Quiz time per question</strong> — Configure the pace of interactive practice.</li>
+<li><strong>Sinhala meaning options</strong> — Enable bilingual support for difficult technical concepts.</li>
+<li><strong>Output type</strong> — Select the learning resource format required.</li>
+</ul></div>
+</section>
+
+<section class="workflow"><span class="label">06 / END-TO-END DEVELOPMENT FLOW</span>
+<div class="workflow-row">
+<div class="workflow-step"><b>01 / UPLOAD</b><span>Educational PDF enters the application.</span></div>
+<div class="workflow-step"><b>02 / EXTRACT</b><span>Document content is prepared for analysis.</span></div>
+<div class="workflow-step"><b>03 / PROCESS</b><span>AI and NLP transform the source material.</span></div>
+<div class="workflow-step"><b>04 / GENERATE</b><span>Notes, quizzes, Q&amp;A and maps are created.</span></div>
+<div class="workflow-step"><b>05 / PRESENT</b><span>Interactive learning resources are delivered.</span></div>
+<div class="workflow-step"><b>06 / EXPORT</b><span>Useful outputs can be saved for revision.</span></div>
+</div></section>
+
+<section class="cards" style="margin-top:1.5rem">
+<article class="card"><span class="label">07 / EDUCATIONAL BENEFITS</span>
+<ul class="list">
+<li><strong>Faster Revision</strong> — Convert lengthy educational documents into concise study materials.</li>
+<li><strong>Active Learning</strong> — Interactive quizzes and Q&amp;A encourage active participation.</li>
+<li><strong>Better Memory Retention</strong> — Active recall supports repeated retrieval of knowledge.</li>
+<li><strong>Visual Learning</strong> — Mind maps provide graphical representations of complex concepts.</li>
+<li><strong>Language Accessibility</strong> — Bilingual support helps Sinhala-speaking learners understand technical content.</li>
+<li><strong>Personalized Workflow</strong> — Learners can choose tools and settings that match their study requirements.</li>
+</ul></article>
+
+<article class="card"><span class="label">08 / WHAT MAKES CHAKRA DIFFERENT?</span>
+<p>Many AI tools can summarize documents, but CHAKRA is designed around a <strong>complete study workflow</strong> rather than stopping at summarization.</p>
+<p>A single educational PDF can become:</p>
+<ul class="list">
+<li><strong>Notes</strong> for concise revision.</li><li><strong>Quizzes</strong> for active practice.</li><li><strong>Active Recall</strong> for memory reinforcement.</li><li><strong>Mind Maps</strong> for visual understanding.</li><li><strong>Bilingual Learning</strong> for accessible technical explanations.</li>
+</ul>
+<p>This positions CHAKRA as an <strong>AI-assisted study environment</strong>, not simply a PDF summarizer.</p></article>
+</section>
+
+<section class="impact" style="margin-top:1.5rem">
+<div><span class="label">09 / PROJECT OUTCOME</span><h2>From documents to a complete AI-assisted learning experience.</h2></div>
+<div><p>CHAKRA demonstrates how <strong>Artificial Intelligence and modern Python-based application development</strong> can be combined to address a real-world educational problem.</p>
+<p>The project brings document processing, AI-generated learning content, interactive quizzes, active recall, visual learning and bilingual support together in one application.</p>
+<p><strong>Tagline:</strong> “From PDFs to Powerful Learning — All in One Smart AI Assistant.”</p></div>
+</section>
+
+<section class="card" style="margin-top:1.5rem"><span class="label">10 / FUTURE IMPROVEMENTS</span>
+<ul class="list">
+<li>Personalized study plans and recommendations.</li><li>Student performance analytics and progress tracking.</li><li>Difficulty-based question generation.</li><li>Spaced repetition and learning streaks.</li><li>More language support.</li><li>Voice-based learning and AI tutoring conversations.</li><li>Automatic exam-paper generation.</li><li>Cloud-based user accounts and personalized learning profiles.</li>
+</ul></section>
+
+<footer class="footer"><span>GIMAVERS · DEVELOPMENT · AI · EDTECH · PYTHON · STREAMLIT</span><a href="gimavers_portfolio_chakra_updated.html">← Back to Projects</a></footer>
+</div></main>
+</body>
+</html>

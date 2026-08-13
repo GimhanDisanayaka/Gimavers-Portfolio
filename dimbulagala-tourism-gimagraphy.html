@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dimbulagala Tourism Promotion &amp; Media Coverage — GIMAGRAPHY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Oswald:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *{box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{
+            margin:0;
+            background:#050505;
+            color:#f2eee8;
+            font-family:'Inter',sans-serif;
+        }
+        .nav{
+            position:fixed;top:0;left:0;right:0;z-index:100;
+            display:flex;justify-content:space-between;align-items:center;
+            padding:1rem 4vw;background:rgba(5,5,5,.84);
+            border-bottom:1px solid rgba(255,255,255,.07);
+            backdrop-filter:blur(18px);
+        }
+        .brand{
+            font-family:'Montserrat',sans-serif;font-weight:700;
+            font-size:.72rem;letter-spacing:3px;
+        }
+        .brand span{color:#aaa}
+        .back{
+            color:#ddd;text-decoration:none;font-family:'Montserrat',sans-serif;
+            font-size:.6rem;letter-spacing:1.4px;padding:.65rem 1rem;
+            border:1px solid rgba(255,255,255,.12);border-radius:30px;transition:.3s ease;
+        }
+        .back:hover{background:#f1eee8;color:#050505}
+        .project{
+            position:relative;min-height:100vh;padding:9rem 2rem 5rem;
+            overflow:hidden;
+            background:
+                radial-gradient(circle at 82% 10%,rgba(212,175,55,.07),transparent 28%),
+                radial-gradient(circle at 12% 45%,rgba(255,255,255,.025),transparent 30%),
+                #050505;
+        }
+        .project::before{
+            content:'';position:absolute;inset:0;opacity:.12;
+            background-image:
+                linear-gradient(rgba(212,175,55,.055) 1px,transparent 1px),
+                linear-gradient(90deg,rgba(212,175,55,.055) 1px,transparent 1px);
+            background-size:72px 72px;
+            mask-image:linear-gradient(to bottom,#000,transparent 90%);
+            pointer-events:none;
+        }
+        .container{position:relative;z-index:2;max-width:1180px;margin:auto}
+        .header{text-align:center;margin-bottom:3.2rem}
+        .eyebrow,.label{
+            display:inline-block;text-transform:uppercase;font-family:'Montserrat',sans-serif;
+            letter-spacing:4px;font-size:.6rem;color:rgba(255,200,87,.62)
+        }
+        .header h1{
+            margin:.85rem auto .8rem;max-width:1000px;font-family:'Montserrat',sans-serif;
+            font-size:clamp(2rem,4.5vw,4.2rem);line-height:1.04;
+            letter-spacing:-1.7px;color:#f5f2ed;
+        }
+        .header h1 span{color:#d4af37}
+        .meta{margin:0;color:#8d8173;font-size:.75rem;letter-spacing:1px;line-height:1.7}
+        .hero{
+            display:grid;grid-template-columns:1.12fr .88fr;gap:3.5rem;
+            align-items:center;margin-bottom:2rem;
+        }
+        .image-wrap{
+            position:relative;overflow:hidden;min-height:420px;border-radius:24px;
+            background:#0b0b0b;border:1px solid rgba(212,175,55,.13);
+            box-shadow:0 35px 100px rgba(0,0,0,.62),0 0 70px rgba(212,175,55,.035);
+        }
+        .image-wrap img{
+            width:100%;height:100%;min-height:420px;display:block;
+            object-fit:cover;object-position:center;
+            filter:saturate(.9) contrast(1.05);
+            transition:transform .8s ease,filter .8s ease;
+        }
+        .image-wrap:hover img{transform:scale(1.025);filter:saturate(1) contrast(1.08)}
+        .image-wrap::after{
+            content:'';position:absolute;inset:0;
+            background:linear-gradient(135deg,rgba(212,175,55,.08),transparent 42%,rgba(0,0,0,.45));
+            pointer-events:none;
+        }
+        .image-tag{
+            position:absolute;left:18px;bottom:18px;z-index:3;
+            padding:8px 14px;border-radius:30px;background:rgba(5,5,5,.72);
+            border:1px solid rgba(212,175,55,.16);backdrop-filter:blur(12px);
+            font-family:'Montserrat',sans-serif;font-size:.52rem;letter-spacing:1.4px;color:#e6c280;
+        }
+        .intro p,.card p,.impact p{
+            margin:1rem 0 0;color:#b7b2ab;font-size:.84rem;font-weight:300;line-height:1.9;
+        }
+        .intro strong,.card strong,.impact strong{color:#e5e1db;font-weight:500}
+        .cards{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+        .card,.impact{
+            background:linear-gradient(145deg,rgba(18,16,13,.92),rgba(8,8,8,.82));
+            border:1px solid rgba(212,175,55,.075);border-radius:20px;padding:2rem;
+            box-shadow:0 22px 65px rgba(0,0,0,.3);backdrop-filter:blur(14px);
+        }
+        .list{list-style:none;padding:0;margin:1.2rem 0 0}
+        .list li{
+            position:relative;padding:.72rem 0 .72rem 1.4rem;
+            border-bottom:1px solid rgba(212,175,55,.055);color:#c8c3bc;
+            font-size:.76rem;line-height:1.65;
+        }
+        .list li:last-child{border-bottom:0}
+        .list li::before{
+            content:'✦';position:absolute;left:0;top:.75rem;color:#d4af37;font-size:.6rem;
+        }
+        .impact{margin-top:1.5rem;display:grid;grid-template-columns:.72fr 1.28fr;gap:3rem}
+        .impact h2{
+            margin:.9rem 0 0;font-family:'Montserrat',sans-serif;
+            font-size:clamp(1.3rem,2.3vw,2.05rem);line-height:1.25;color:#f0ede8;
+        }
+        .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;margin-top:1.4rem}
+        .stat{
+            padding:1rem;border-radius:14px;background:rgba(212,175,55,.035);
+            border:1px solid rgba(212,175,55,.07)
+        }
+        .stat strong{display:block;font-family:'Montserrat',sans-serif;font-size:1rem;color:#eeeae4}
+        .stat span{display:block;margin-top:.3rem;color:#85817c;font-size:.56rem;line-height:1.5}
+        .footer{
+            display:flex;justify-content:space-between;align-items:center;gap:1rem;
+            margin-top:2.5rem;padding-top:1.4rem;border-top:1px solid rgba(212,175,55,.07)
+        }
+        .footer span{font-family:'Montserrat',sans-serif;font-size:.48rem;letter-spacing:2px;color:#66635f}
+        .footer a{
+            color:#d4af37;text-decoration:none;font-family:'Montserrat',sans-serif;
+            font-size:.58rem;letter-spacing:1px;padding:.65rem 1.1rem;
+            border:1px solid rgba(212,175,55,.14);border-radius:30px;transition:.3s ease;
+        }
+        .footer a:hover{background:#d4af37;color:#050505}
+        @media(max-width:900px){
+            .hero,.cards,.impact{grid-template-columns:1fr}
+            .image-wrap,.image-wrap img{min-height:320px}
+        }
+        @media(max-width:600px){
+            .project{padding:7rem 1rem 3rem}
+            .header h1{font-size:2rem}
+            .meta{font-size:.62rem}
+            .card,.impact{padding:1.3rem}
+            .image-wrap,.image-wrap img{min-height:250px}
+            .footer{align-items:flex-start;flex-direction:column}
+            .stats{grid-template-columns:1fr}
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="brand">GIMAVERS <span>/ GIMAGRAPHY</span></div>
+        <a href="GIMAVERS_main_wheel_fixed(1).html#projectSection" class="back">← Back to Portfolio</a>
+    </nav>
+
+    <main class="project">
+        <div class="container">
+            <header class="header">
+                <span class="eyebrow">GIMAGRAPHY / FIELD MEDIA PROJECT</span>
+                <h1>Dimbulagala Tourism Promotion <span>&amp; Media Coverage</span></h1>
+                <p class="meta">Media Coverage, Visual Documentation, Content Creation &amp; Tourism Promotion · Dimbulagala, Polonnaruwa</p>
+            </header>
+
+            <section class="hero">
+                <div class="image-wrap">
+                    <img src="assets/Picsart_26-08-13_16-17-15-807.jpg"
+                         alt="Dimbulagala Tourism Promotion and Media Coverage"
+                         loading="eager">
+                    <div class="image-tag">GIMAGRAPHY · PROFESSIONAL MEDIA COVERAGE</div>
+                </div>
+
+                <div class="intro">
+                    <span class="label">01 / PROJECT OVERVIEW</span>
+                    <p>
+                        The <strong>Dimbulagala Tourism Promotion &amp; Media Coverage Project</strong> was a field-based
+                        initiative focused on exploring, documenting, and promoting the tourism potential of Dimbulagala
+                        and surrounding areas of the Polonnaruwa District.
+                    </p>
+                    <p>
+                        The programme was conducted under the leadership of <strong>Professor Raj Somadeva</strong>,
+                        bringing together archaeology, cultural heritage, natural landscapes, tourism, media, and local
+                        business development.
+                    </p>
+                    <p>
+                        Through <strong>GIMAGRAPHY</strong>, I provided comprehensive media coverage in collaboration
+                        with <strong>DREAM VIEW HOTEL</strong>, documenting field activities, locations, experiences,
+                        tourism-related aspects, and the overall atmosphere through photography, visual content creation,
+                        and media documentation.
+                    </p>
+                </div>
+            </section>
+
+            <section class="cards">
+                <article class="card">
+                    <span class="label">02 / PROJECT OBJECTIVES</span>
+                    <ul class="list">
+                        <li>Explore and document historically and archaeologically significant locations.</li>
+                        <li>Observe and document the natural beauty and unique landscapes of the Dimbulagala region.</li>
+                        <li>Create visual content that can contribute to tourism promotion.</li>
+                        <li>Provide professional media coverage for the programme.</li>
+                        <li>Support the promotional visibility of <strong>DREAM VIEW HOTEL</strong>.</li>
+                        <li>Capture authentic field experiences through photography and visual storytelling.</li>
+                        <li>Develop practical exposure to professional media and field documentation.</li>
+                    </ul>
+                </article>
+
+                <article class="card">
+                    <span class="label">03 / GIMAGRAPHY'S ROLE</span>
+                    <ul class="list">
+                        <li>Planning and conducting field-based media coverage.</li>
+                        <li>Photography and visual documentation.</li>
+                        <li>Capturing tourism-oriented photographs and visual content.</li>
+                        <li>Documenting archaeological and culturally significant locations.</li>
+                        <li>Capturing natural landscapes and environmental beauty.</li>
+                        <li>Creating visual stories around the field experience.</li>
+                        <li>Supporting the promotional visibility of <strong>DREAM VIEW HOTEL</strong>.</li>
+                        <li>Organising visual material for future digital and promotional use.</li>
+                    </ul>
+                </article>
+            </section>
+
+            <section class="cards" style="margin-top:1.5rem">
+                <article class="card">
+                    <span class="label">04 / ARCHAEOLOGY &amp; CULTURAL EXPLORATION</span>
+                    <p>
+                        The field visits provided direct exposure to archaeological and historically significant locations
+                        within the Dimbulagala region. The experience strengthened my understanding of Sri Lanka's
+                        archaeological and cultural heritage and the importance of <strong>responsible visual storytelling</strong>
+                        when documenting places with historical, archaeological, and cultural significance.
+                    </p>
+                    <p>
+                        The programme also helped connect historical sites, surrounding landscapes, local culture, and
+                        tourism into a broader understanding of destination identity.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <span class="label">05 / LEARNING FROM PROFESSOR RAJ SOMADEVA</span>
+                    <p>
+                        A particularly valuable part of the project was the opportunity to interact with and learn from
+                        <strong>Professor Raj Somadeva</strong> during the field programme. His academic and field experience
+                        provided valuable guidance for understanding archaeological and historical locations from a more
+                        informed perspective.
+                    </p>
+                    <p>
+                        The experience strengthened the relationship between
+                        <strong>Archaeology → Heritage → Environment → Tourism → Storytelling</strong>.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <span class="label">06 / NATURAL ENVIRONMENT &amp; TOURISM</span>
+                    <p>
+                        Dimbulagala's landscapes, natural formations, surroundings, and scenic atmosphere created valuable
+                        opportunities for destination-focused visual storytelling. Through GIMAGRAPHY, these elements were
+                        documented to present Dimbulagala as a destination with <strong>natural, cultural, and experiential
+                        tourism potential</strong>.
+                    </p>
+                    <p>
+                        The project helped develop a more complete approach to tourism photography: communicating the
+                        <strong>experience and identity of a destination</strong>, not simply photographing a location.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <span class="label">07 / PROFESSIONAL MEDIA EXPOSURE</span>
+                    <p>
+                        Working alongside experienced media professionals provided practical insight into field coverage,
+                        communication, moment selection, documentation workflows, and professional collaboration.
+                    </p>
+                    <p>
+                        These interactions strengthened my confidence in communicating and collaborating with professionals
+                        from different areas of the media and tourism sectors.
+                    </p>
+                </article>
+            </section>
+
+            <section class="impact">
+                <div>
+                    <span class="label">08 / PROJECT IMPACT</span>
+                    <h2>Connecting heritage, tourism, business and storytelling through visual media.</h2>
+                    <div class="stats">
+                        <div class="stat"><strong>GIMAGRAPHY</strong><span>Complete media coverage &amp; visual documentation</span></div>
+                        <div class="stat"><strong>Dimbulagala</strong><span>Tourism and destination-focused documentation</span></div>
+                        <div class="stat"><strong>DREAM VIEW HOTEL</strong><span>Tourism-business promotional context</span></div>
+                        <div class="stat"><strong>Field Experience</strong><span>Professional media and academic exposure</span></div>
+                    </div>
+                </div>
+                <div>
+                    <p>
+                        The project contributed to the visual documentation and promotional storytelling of
+                        <strong>Dimbulagala and surrounding areas of the Polonnaruwa District</strong>. The programme's
+                        activities, locations, natural surroundings, professional interactions, and tourism-related
+                        experiences were documented for digital and promotional purposes.
+                    </p>
+                    <p>
+                        More importantly, the experience demonstrated how creative media can connect
+                        <strong>heritage, tourism, business, and storytelling</strong> while helping communicate the value
+                        of Sri Lanka's historical and natural destinations to wider audiences.
+                    </p>
+                    <p>
+                        The collaboration with <strong>DREAM VIEW HOTEL</strong> also provided practical exposure to working
+                        with a business stakeholder while maintaining the quality and professionalism expected from a media
+                        and creative service provider.
+                    </p>
+                </div>
+            </section>
+
+            <section class="card" style="margin-top:1.5rem">
+                <span class="label">09 / PERSONAL REFLECTION</span>
+                <p>
+                    This project became one of the most valuable field experiences I have gained through GIMAGRAPHY.
+                    Exploring Dimbulagala while learning about its archaeological and natural significance gave me a
+                    different perspective on content creation.
+                </p>
+                <p>
+                    I learned that effective media coverage is not simply about capturing visually attractive photographs;
+                    it is about understanding the <strong>story, context, people, environment, and purpose</strong> behind
+                    what is being documented.
+                </p>
+                <p>
+                    The experience strengthened my belief that digital media can be used not only for commercial promotion,
+                    but also as a powerful tool for <strong>cultural preservation, tourism awareness, knowledge sharing,
+                    and destination promotion</strong>.
+                </p>
+            </section>
+
+            <footer class="footer">
+                <span>GIMAGRAPHY · TOURISM PROMOTION · MEDIA COVERAGE · VISUAL DOCUMENTATION · CONTENT CREATION</span>
+                <a href="GIMAVERS_main_wheel_fixed(1).html#projectSection">← Back to Projects</a>
+            </footer>
+        </div>
+    </main>
+</body>
+</html>
