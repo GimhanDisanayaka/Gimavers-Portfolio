@@ -1118,6 +1118,8 @@
             scrollbar-width: thin;
             scrollbar-color: rgba(212, 175, 55, 0.2) transparent;
             -webkit-overflow-scrolling: touch;
+            touch-action: pan-x;
+            overscroll-behavior-x: contain;
         }
 
         .cs-track-wrap::-webkit-scrollbar {
@@ -1148,6 +1150,20 @@
                 user-select: none;
                 -webkit-touch-callout: none;
                 scroll-behavior: auto;
+                touch-action: pan-x !important;
+                -webkit-overflow-scrolling: touch !important;
+                -ms-overflow-style: auto !important;
+                scrollbar-width: auto !important;
+            }
+            
+            .cs-track-wrap::-webkit-scrollbar {
+                display: auto !important;
+                height: 6px !important;
+            }
+            
+            .cs-track-wrap::-webkit-scrollbar-thumb {
+                background: rgba(212, 175, 55, 0.4) !important;
+                border-radius: 3px !important;
             }
 
             .cs-btn {
@@ -1162,8 +1178,7 @@
             display: flex;
             flex-direction: row;
             gap: 1rem;
-            transition: transform 0.55s cubic-bezier(0.23, 1, 0.32, 1);
-            will-change: transform;
+            will-change: auto;
             padding: 0 0.3rem;
             scroll-snap-type: x mandatory;
         }
@@ -6057,10 +6072,23 @@ body {
 
 <style id="certificate-horizontal-final-fix">
 #certCarouselWrap{width:100%!important;display:flex!important;flex-direction:column!important;align-items:stretch!important;overflow:visible!important}
-#certCarouselWrap .cs-track-wrap{width:100%!important;height:520px!important;max-height:none!important;overflow-x:auto!important;overflow-y:hidden!important;scroll-behavior:smooth!important;cursor:grab!important;touch-action:pan-x!important;-webkit-overflow-scrolling:touch!important;scrollbar-width:none!important}
-#certCarouselWrap .cs-track-wrap::-webkit-scrollbar{display:none!important;width:0!important;height:0!important}
+#certCarouselWrap .cs-track-wrap{width:100%!important;height:520px!important;max-height:none!important;overflow-x:auto!important;overflow-y:hidden!important;scroll-behavior:smooth!important;cursor:grab!important;touch-action:pan-x!important;-webkit-overflow-scrolling:touch!important;scrollbar-width:thin!important}
+#certCarouselWrap .cs-track-wrap::-webkit-scrollbar{display:auto!important;width:0!important;height:6px!important}
+#certCarouselWrap .cs-track-wrap::-webkit-scrollbar-thumb{background:rgba(212,175,55,0.2)!important;border-radius:3px!important}
 #certCarouselWrap .cs-track-wrap.is-dragging{cursor:grabbing!important;scroll-behavior:auto!important;user-select:none!important}
-#certCarouselWrap .cs-track{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:stretch!important;gap:24px!important;width:max-content!important;min-width:max-content!important;height:100%!important;transform:none!important}
+#certCarouselWrap .cs-track{
+    display:flex!important;
+    flex-direction:row!important;
+    flex-wrap:nowrap!important;
+    align-items:stretch!important;
+    gap:24px!important;
+    width:auto!important;
+    min-width:max-content!important;
+    height:100%!important;
+    transform:none!important;
+    transition:none!important;
+    scroll-snap-type:x mandatory!important;
+}
 #certCarouselWrap .cs-card{box-sizing:border-box!important;flex:0 0 360px!important;width:360px!important;height:500px!important;min-height:0!important;margin:0!important;padding:0!important;display:flex!important;flex-direction:column!important;overflow:hidden!important;border-radius:24px!important;background:linear-gradient(145deg,rgba(255,255,255,.10),rgba(255,255,255,.025))!important;border:1px solid rgba(255,255,255,.14)!important}
 #certCarouselWrap .cs-card-image-wrap{height:355px!important;min-height:355px!important;max-height:355px!important;width:100%!important;background:#fff!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important}
 #certCarouselWrap .cs-card-image-wrap img{width:100%!important;height:100%!important;max-height:none!important;object-fit:contain!important;filter:none!important;background:#fff!important}
@@ -6076,8 +6104,9 @@ body {
 #certCarouselWrap .cs-btn{z-index:5!important;cursor:pointer!important}
 #certCarouselWrap .cs-dots-group{display:flex!important;align-items:center!important;gap:6px!important}
 #certCarouselWrap .cs-dot{cursor:pointer!important}
-@media(max-width:1100px){#certCarouselWrap .cs-card{flex: 0 0 320px!important;width:320px!important;min-width:320px!important}#certCarouselWrap .cs-track-wrap{height:380px!important}#certCarouselWrap .cs-card-image-wrap,#certCarouselWrap .cs-cert-placeholder{height:270px!important;min-height:270px!important}}
-@media(max-width:700px){#certCarouselWrap .cs-track-wrap{height:320px!important}#certCarouselWrap .cs-card{flex: 0 0 calc(100vw - 54px)!important;width:calc(100vw - 54px)!important;height:auto!important}#certCarouselWrap .cs-card-image-wrap,#certCarouselWrap .cs-cert-placeholder{height:220px!important;min-height:220px!important}#certCarouselWrap .cs-cert-placeholder span{font-size:4rem!important}#certCarouselWrap .cs-card-content{min-height:auto!important;padding:12px 14px!important}}
+@media(max-width:1100px){#certCarouselWrap .cs-card{flex: 0 0 320px!important;width:320px!important;min-width:320px!important}#certCarouselWrap .cs-track-wrap{height:380px!important;scrollbar-width:thin!important}#certCarouselWrap .cs-card-image-wrap,#certCarouselWrap .cs-cert-placeholder{height:270px!important;min-height:270px!important}}
+@media(max-width:700px){#certCarouselWrap .cs-track-wrap{height:320px!important;overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:auto!important}#certCarouselWrap .cs-track-wrap::-webkit-scrollbar{height:8px!important}#certCarouselWrap .cs-track-wrap::-webkit-scrollbar-thumb{background:rgba(212,175,55,0.4)!important}#certCarouselWrap .cs-track{width:auto!important;min-width:max-content!important}#certCarouselWrap .cs-card{flex: 0 0 calc(100vw - 54px)!important;width:calc(100vw - 54px)!important;height:auto!important}#certCarouselWrap .cs-card-image-wrap,#certCarouselWrap .cs-cert-placeholder{height:220px!important;min-height:220px!important}#certCarouselWrap .cs-cert-placeholder span{font-size:4rem!important}#certCarouselWrap .cs-card-content{min-height:auto!important;padding:12px 14px!important}}
+@media(max-width:480px){#certCarouselWrap .cs-track-wrap{height:280px!important;overflow-x:auto!important;overflow-y:hidden!important;touch-action:pan-x!important;scrollbar-width:auto!important}#certCarouselWrap .cs-track-wrap::-webkit-scrollbar{height:8px!important}#certCarouselWrap .cs-track-wrap::-webkit-scrollbar-thumb{background:rgba(212,175,55,0.4)!important}#certCarouselWrap .cs-track{width:auto!important;min-width:max-content!important}#certCarouselWrap .cs-card{flex: 0 0 calc(100vw - 40px)!important;width:calc(100vw - 40px)!important;height:auto!important;border-radius:16px!important}#certCarouselWrap .cs-card-image-wrap,#certCarouselWrap .cs-cert-placeholder{height:180px!important;min-height:180px!important}}
 </style>
 
 <style id="social-unique-popup-colors">
@@ -8620,9 +8649,13 @@ body.wheel-open{
                 let startScroll = 0;
                 let raf = null;
 
-                const visible = () => isSkill
-                    ? (innerWidth <= 480 ? 2 : innerWidth <= 768 ? 2 : innerWidth <= 1024 ? 3 : 4)
-                    : (innerWidth <= 700 ? 1 : innerWidth <= 1100 ? 2 : 3);
+                const visible = () => {
+                    if (isSkill) {
+                        return innerWidth <= 480 ? 2 : innerWidth <= 768 ? 2 : innerWidth <= 1024 ? 3 : 4;
+                    }
+                    // For certificates: always 1 card per "page" to simplify mobile scrolling
+                    return 1;
+                };
 
                 function cardStep() {
                     const card = track.querySelector('.cs-card');
@@ -8677,9 +8710,13 @@ body.wheel-open{
                         }
                         track.appendChild(card);
                         if(!isSkill){
-                            card.addEventListener('mouseenter',()=>window.showCertificateHover?.(item));
+                            card.addEventListener('mouseenter',()=>{
+                                if(!dragging && !moved) window.showCertificateHover?.(item);
+                            });
                             card.addEventListener('mouseleave',()=>window.hideCertificateHover?.());
-                            card.addEventListener('focus',()=>window.showCertificateHover?.(item));
+                            card.addEventListener('focus',()=>{
+                                if(!dragging && !moved) window.showCertificateHover?.(item);
+                            });
                             card.addEventListener('blur',()=>window.hideCertificateHover?.());
                         }
                     });
@@ -8692,7 +8729,8 @@ body.wheel-open{
                 },{passive:true});
 
                 wrap.addEventListener('wheel',e=>{
-                    if(isSkill) return;
+                    // Don't intercept wheel on mobile/touch devices
+                    if(isSkill || ('ontouchstart' in window)) return;
                     if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){
                         e.preventDefault();
                         wrap.scrollLeft += e.deltaY;
@@ -8708,7 +8746,10 @@ body.wheel-open{
                     if(!dragging || isSkill) return;
                     const dx=e.clientX-startX;
                     if(Math.abs(dx)>5) moved=true;
-                    wrap.scrollLeft=startScroll-dx;
+                    // Only apply drag on desktop
+                    if(!('ontouchstart' in window) && e.pointerType !== 'touch') {
+                        wrap.scrollLeft=startScroll-dx;
+                    }
                 });
                 wrap.addEventListener('pointerup',e=>{
                     if(!dragging || isSkill) return;
