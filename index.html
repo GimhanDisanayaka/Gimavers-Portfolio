@@ -1109,18 +1109,19 @@
             position: relative;
             width: 100%;
             max-height: 420px;
-            overflow-y: auto;
-            overflow-x: hidden;
+            overflow-y: hidden;
+            overflow-x: auto;
             cursor: grab;
             border-radius: 16px;
             scroll-behavior: smooth;
-            padding-right: 4px;
+            padding-bottom: 4px;
             scrollbar-width: thin;
             scrollbar-color: rgba(212, 175, 55, 0.2) transparent;
+            -webkit-overflow-scrolling: touch;
         }
 
         .cs-track-wrap::-webkit-scrollbar {
-            width: 4px;
+            height: 4px;
         }
 
         .cs-track-wrap::-webkit-scrollbar-track {
@@ -1140,21 +1141,37 @@
             cursor: grabbing;
         }
 
+        /* Mobile Touch Optimizations for Certificates */
+        @media (hover: none) and (pointer: coarse) {
+            .cs-track-wrap {
+                -webkit-user-select: none;
+                user-select: none;
+                -webkit-touch-callout: none;
+                scroll-behavior: auto;
+            }
+
+            .cs-btn {
+                -webkit-appearance: none;
+                appearance: none;
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+
         .cs-track {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             gap: 1rem;
             transition: transform 0.55s cubic-bezier(0.23, 1, 0.32, 1);
             will-change: transform;
-            padding: 0.3rem 0;
-            scroll-snap-type: y mandatory;
-            -webkit-overflow-scrolling: touch;
+            padding: 0 0.3rem;
+            scroll-snap-type: x mandatory;
         }
 
         .cs-card {
             flex: 0 0 auto;
-            width: 100%;
-            max-width: 100%;
+            min-width: 280px;
+            width: 280px;
             background: rgba(20, 16, 12, 0.55);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
@@ -1170,6 +1187,7 @@
             align-items: center;
             text-align: left;
             scroll-snap-align: start;
+            scroll-snap-stop: always;
             user-select: none;
             -webkit-user-select: none;
             gap: 1rem;
@@ -2193,6 +2211,33 @@
             transform: translateX(3px);
         }
 
+        /* Mobile Touch Optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            .carousel-card {
+                -webkit-user-select: none;
+                user-select: none;
+                -webkit-touch-callout: none;
+            }
+            
+            .carousel-card:active .card-image img {
+                transform: scale(1.03);
+            }
+            
+            .carousel-card .card-link {
+                -webkit-appearance: none;
+                appearance: none;
+                min-height: 44px;
+                padding: 8px 16px;
+            }
+            
+            .carousel-btn {
+                -webkit-appearance: none;
+                appearance: none;
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+
         .carousel-controls {
             display: flex;
             gap: 0.8rem;
@@ -2450,19 +2495,71 @@
         }
 
         @media (max-width: 768px) {
+            .project-section {
+                padding: 2rem 1rem 2rem;
+            }
             .project-container {
                 grid-template-columns: 1fr;
                 gap: 2.5rem;
+                padding: 0 0.5rem;
             }
             .carousel-wrapper {
-                max-width: 360px;
+                max-width: 100%;
+                padding: 0 1rem;
             }
             .carousel-card {
-                flex: 0 0 88%;
-                max-width: 280px;
+                flex: 0 0 80%;
+                max-width: 320px;
+                border-radius: 14px;
+                margin: 0 auto;
+            }
+            .carousel-card .card-image {
+                aspect-ratio: 16/10;
+            }
+            .carousel-card .card-body {
+                padding: 0.9rem 1.1rem 1rem;
+                gap: 0.4rem;
+            }
+            .carousel-card .card-top-row {
+                margin-bottom: 0.3rem;
             }
             .carousel-card .card-title {
-                font-size: 1.05rem;
+                font-size: 1.1rem;
+                font-weight: 600;
+                line-height: 1.3;
+            }
+            .carousel-card .card-desc {
+                font-size: 0.65rem;
+                line-height: 1.5;
+                margin: 0.2rem 0 0.4rem;
+            }
+            .carousel-card .card-tags {
+                gap: 6px;
+                margin: 0.3rem 0 0.5rem;
+            }
+            .carousel-card .card-tag {
+                font-size: 0.5rem;
+                padding: 3px 8px;
+            }
+            .carousel-card .card-badge {
+                font-size: 0.45rem;
+                padding: 4px 12px;
+                top: 12px;
+                left: 12px;
+            }
+            .carousel-card .card-price {
+                font-size: 0.65rem;
+            }
+            .carousel-card .card-rating {
+                font-size: 0.6rem;
+            }
+            .carousel-card .card-footer {
+                padding-top: 0.8rem;
+                margin-top: 0.3rem;
+            }
+            .carousel-card .card-link {
+                font-size: 0.55rem;
+                padding: 6px 14px;
             }
             .carousel-header {
                 font-size: 0.55rem;
@@ -2470,7 +2567,7 @@
                 margin-bottom: 1rem;
             }
             .carousel-controls {
-                margin-top: 1rem;
+                margin-top: 1.2rem;
             }
             .carousel-btn {
                 width: 36px;
@@ -2499,57 +2596,221 @@
             }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 600px) {
             .project-section {
-                padding: 1.5rem 0.8rem 2.5rem;
-                min-height: auto;
+                padding: 1.5rem 0.75rem 2.5rem;
             }
             .carousel-wrapper {
-                max-width: 300px;
+                max-width: 100%;
+                padding: 0 0.5rem;
             }
             .carousel-card {
-                flex: 0 0 90%;
-                max-width: 240px;
-                border-radius: 16px;
+                flex: 0 0 85%;
+                max-width: calc(100vw - 3rem);
+                border-radius: 12px;
+            }
+            .carousel-card .card-image {
+                aspect-ratio: 16/10;
+                border-radius: 12px 12px 0 0;
             }
             .carousel-card .card-body {
-                padding: 0.8rem 1rem 1rem;
+                padding: 0.85rem 1rem 0.95rem;
+                gap: 0.3rem;
             }
             .carousel-card .card-title {
-                font-size: 0.95rem;
+                font-size: 1rem;
+                margin: 0.1rem 0;
             }
             .carousel-card .card-desc {
-                font-size: 0.55rem;
+                font-size: 0.6rem;
+                margin: 0.15rem 0 0.35rem;
+            }
+            .carousel-card .card-tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 5px;
+                margin: 0.2rem 0 0.4rem;
+            }
+            .carousel-card .card-tag {
+                font-size: 0.48rem;
+                padding: 2px 6px;
             }
             .carousel-card .card-badge {
-                font-size: 0.4rem;
+                font-size: 0.42rem;
                 padding: 3px 10px;
                 top: 10px;
                 left: 10px;
             }
+            .carousel-card .card-top-row {
+                margin-bottom: 0.2rem;
+                flex-wrap: wrap;
+                gap: 0.3rem;
+            }
             .carousel-card .card-price {
                 font-size: 0.6rem;
+                order: 3;
+                width: 100%;
             }
             .carousel-card .card-rating {
                 font-size: 0.55rem;
             }
+            .carousel-card .card-footer {
+                padding-top: 0.6rem;
+                margin-top: 0.2rem;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            .carousel-card .card-date {
+                font-size: 0.48rem;
+                flex: 1;
+            }
+            .carousel-card .card-link {
+                font-size: 0.52rem;
+                padding: 5px 12px;
+                flex: 1;
+                justify-content: center;
+            }
             .carousel-btn {
-                width: 32px;
-                height: 32px;
+                width: 34px;
+                height: 34px;
                 font-size: 0.7rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .project-section {
+                padding: 1.2rem 0.6rem 2rem;
+                min-height: auto;
+            }
+            .carousel-wrapper {
+                max-width: 100%;
+                padding: 0;
+            }
+            .carousel-card {
+                flex: 0 0 90%;
+                max-width: calc(100vw - 2rem);
+                border-radius: 11px;
+            }
+            .carousel-card .card-image {
+                aspect-ratio: 16/9;
+                border-radius: 11px 11px 0 0;
+            }
+            .carousel-card .card-body {
+                padding: 0.75rem 0.9rem 0.85rem;
+                gap: 0.25rem;
+            }
+            .carousel-card .card-title {
+                font-size: 0.95rem;
+                font-weight: 600;
+                margin: 0.05rem 0;
+            }
+            .carousel-card .card-desc {
+                font-size: 0.55rem;
+                line-height: 1.4;
+                margin: 0.1rem 0 0.3rem;
+            }
+            .carousel-card .card-tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 4px;
+                margin: 0.15rem 0 0.35rem;
+            }
+            .carousel-card .card-tag {
+                font-size: 0.45rem;
+                padding: 2px 5px;
+            }
+            .carousel-card .card-badge {
+                font-size: 0.4rem;
+                padding: 3px 9px;
+                top: 9px;
+                left: 9px;
+            }
+            .carousel-card .card-top-row {
+                margin-bottom: 0.15rem;
+                gap: 0.25rem;
+            }
+            .carousel-card .card-price {
+                font-size: 0.58rem;
+                font-weight: 600;
+                order: 3;
+                width: 100%;
+            }
+            .carousel-card .card-price span {
+                font-size: 0.5rem;
+            }
+            .carousel-card .card-rating {
+                font-size: 0.52rem;
+                gap: 3px;
+            }
+            .carousel-card .card-footer {
+                padding-top: 0.55rem;
+                margin-top: 0.15rem;
+                flex-wrap: wrap;
+                gap: 0.4rem;
+            }
+            .carousel-card .card-date {
+                font-size: 0.45rem;
+                flex: 1;
+            }
+            .carousel-card .card-link {
+                font-size: 0.5rem;
+                padding: 4px 10px;
+                flex: 1;
+                justify-content: center;
+                min-height: 24px;
+                display: flex;
+                align-items: center;
+            }
+            .carousel-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 0.65rem;
+                padding: 6px;
             }
             .carousel-dot {
                 width: 4px;
                 height: 4px;
             }
             .carousel-dot.active {
-                width: 14px;
+                width: 12px;
             }
             .carousel-card.floating {
                 animation: none !important;
             }
             .carousel-card.tilt-active {
                 transform: none !important;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .project-section {
+                padding: 1rem 0.5rem 1.5rem;
+            }
+            .carousel-wrapper {
+                padding: 0;
+            }
+            .carousel-card {
+                flex: 0 0 92%;
+                max-width: calc(100vw - 1.2rem);
+            }
+            .carousel-card .card-image {
+                aspect-ratio: 16/9;
+            }
+            .carousel-card .card-body {
+                padding: 0.65rem 0.8rem 0.75rem;
+            }
+            .carousel-card .card-title {
+                font-size: 0.85rem;
+            }
+            .carousel-card .card-desc {
+                font-size: 0.5rem;
+            }
+            .carousel-card .card-price {
+                font-size: 0.55rem;
+            }
+            .carousel-card .card-link {
+                font-size: 0.45rem;
+                padding: 3px 8px;
             }
         }
 
@@ -3450,17 +3711,24 @@
             color: #e4e6ea !important;
         }
         #certCarouselWrap .cs-track-wrap {
-            height: 730px !important;
+            height: 420px !important;
             padding: .5rem !important;
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
         }
         #certCarouselWrap .cs-track {
             gap: 24px !important;
+            flex-direction: row !important;
         }
         #certCarouselWrap .cs-card {
-            width: 100% !important;
+            flex: 0 0 380px !important;
+            width: 380px !important;
+            min-width: 380px !important;
+            max-width: 380px !important;
             min-height: 320px !important;
             padding: 0 !important;
-            display: block !important;
+            display: flex !important;
+            flex-direction: column !important;
             overflow: hidden !important;
             border-radius: 26px !important;
             background: linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.025)) !important;
@@ -3829,9 +4097,22 @@
             .qr-card { min-height:330px; }
         }
         @media (max-width: 700px) {
-            #certCarouselWrap .cs-track-wrap { height:620px !important; }
-            #certCarouselWrap .cs-card { min-height:260px !important; }
-            #certCarouselWrap .cs-card-image-wrap, #certCarouselWrap .cs-card-image-wrap img { max-height:340px !important; }
+            #certCarouselWrap .cs-track-wrap { 
+                height: 320px !important;
+                overflow-x: auto !important;
+                overflow-y: hidden !important;
+            }
+            #certCarouselWrap .cs-card { 
+                min-height: auto !important;
+                height: auto !important;
+                flex: 0 0 calc(100vw - 60px) !important;
+                width: calc(100vw - 60px) !important;
+            }
+            #certCarouselWrap .cs-card-image-wrap, #certCarouselWrap .cs-card-image-wrap img { 
+                max-height: 250px !important;
+                height: 250px !important;
+                width: 100% !important;
+            }
             .services-brand-section .services-bar { grid-template-columns:1fr !important; }
             .services-brand-section .service-item { min-height:280px; }
             .qr-grid { grid-template-columns:1fr !important; }
@@ -5559,16 +5840,31 @@ body {
 }
 
 @media (max-width:768px){
-    #certCarouselWrap .cs-track-wrap{height:460px !important;max-height:460px !important;}
+    #certCarouselWrap .cs-track-wrap{
+        height:320px !important;
+        max-height:320px !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+    }
+    #certCarouselWrap .cs-track {
+        flex-direction: row !important;
+        gap: 1rem !important;
+    }
     #certCarouselWrap .cs-card{
-        flex-basis:78vw !important;
-        width:78vw !important;
-        height:400px !important;
-        min-height:400px !important;
+        flex: 0 0 calc(100vw - 60px) !important;
+        width: calc(100vw - 60px) !important;
+        min-width: calc(100vw - 60px) !important;
+        max-width: calc(100vw - 60px) !important;
+        height: auto !important;
+        min-height: auto !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
     }
     #certCarouselWrap .cs-card .cs-card-image-wrap{
-        height:275px !important;
-        min-height:275px !important;
+        width: 100% !important;
+        height: 250px !important;
+        min-height: 250px !important;
+        max-height: 250px !important;
     }
     .cert-hover-popup{
         width:calc(100vw - 24px);
@@ -5576,19 +5872,64 @@ body {
     }
     .cert-hover-popup .cert-popup-image{height:270px;}
 }
-@media (max-width:480px){
-    #certCarouselWrap .cs-track-wrap{height:390px !important;max-height:390px !important;}
+@media (max-width:600px){
+    #certCarouselWrap .cs-track-wrap{
+        height: 300px !important;
+        max-height: 300px !important;
+    }
     #certCarouselWrap .cs-card{
-        flex-basis:84vw !important;
-        width:84vw !important;
-        height:350px !important;
-        min-height:350px !important;
+        flex: 0 0 calc(100vw - 40px) !important;
+        width: calc(100vw - 40px) !important;
+        min-width: calc(100vw - 40px) !important;
     }
     #certCarouselWrap .cs-card .cs-card-image-wrap{
-        height:225px !important;
-        min-height:225px !important;
+        height: 220px !important;
+        min-height: 220px !important;
     }
-    #certCarouselWrap .cs-card .cs-card-content{padding:14px 16px !important;}
+    #certCarouselWrap .cs-card .cs-card-content{
+        padding: 12px 14px !important;
+    }
+}
+@media (max-width:480px){
+    #certCarouselWrap .cs-track-wrap{
+        height: 280px !important;
+        max-height: 280px !important;
+        padding: 0 !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+    }
+    #certCarouselWrap .cs-track {
+        gap: 0.8rem !important;
+    }
+    #certCarouselWrap .cs-card{
+        flex: 0 0 calc(100vw - 32px) !important;
+        width: calc(100vw - 32px) !important;
+        min-width: calc(100vw - 32px) !important;
+        max-width: calc(100vw - 32px) !important;
+        border-radius: 12px !important;
+        padding: 0 !important;
+        height: auto !important;
+        min-height: auto !important;
+    }
+    #certCarouselWrap .cs-card .cs-card-image-wrap{
+        width: 100% !important;
+        height: 180px !important;
+        min-height: 180px !important;
+        max-height: 180px !important;
+        border-radius: 12px 12px 0 0 !important;
+    }
+    #certCarouselWrap .cs-card .cs-card-content{
+        padding: 10px 12px !important;
+    }
+    #certCarouselWrap .cs-card-title {
+        font-size: 0.95rem !important;
+    }
+    #certCarouselWrap .cs-card-sub {
+        font-size: 0.65rem !important;
+    }
+    #certCarouselWrap .cs-card-year {
+        font-size: 0.55rem !important;
+    }
     .cert-hover-popup .cert-popup-image{height:220px;}
     .cert-hover-popup .cert-popup-body{padding:18px;}
 }
@@ -5735,8 +6076,8 @@ body {
 #certCarouselWrap .cs-btn{z-index:5!important;cursor:pointer!important}
 #certCarouselWrap .cs-dots-group{display:flex!important;align-items:center!important;gap:6px!important}
 #certCarouselWrap .cs-dot{cursor:pointer!important}
-@media(max-width:1100px){#certCarouselWrap .cs-card{flex-basis:320px!important;width:320px!important}#certCarouselWrap .cs-track-wrap{height:500px!important}#certCarouselWrap .cs-card{height:480px!important}#certCarouselWrap .cs-card-image-wrap,#certCarouselWrap .cs-cert-placeholder{height:335px!important;min-height:335px!important}}
-@media(max-width:700px){#certCarouselWrap .cs-track-wrap{height:430px!important}#certCarouselWrap .cs-card{flex-basis:calc(100vw - 54px)!important;width:calc(100vw - 54px)!important;height:410px!important}#certCarouselWrap .cs-card-image-wrap,#certCarouselWrap .cs-cert-placeholder{height:285px!important;min-height:285px!important}#certCarouselWrap .cs-cert-placeholder span{font-size:4rem!important}#certCarouselWrap .cs-card-content{min-height:125px!important;padding:15px 18px!important}}
+@media(max-width:1100px){#certCarouselWrap .cs-card{flex: 0 0 320px!important;width:320px!important;min-width:320px!important}#certCarouselWrap .cs-track-wrap{height:380px!important}#certCarouselWrap .cs-card-image-wrap,#certCarouselWrap .cs-cert-placeholder{height:270px!important;min-height:270px!important}}
+@media(max-width:700px){#certCarouselWrap .cs-track-wrap{height:320px!important}#certCarouselWrap .cs-card{flex: 0 0 calc(100vw - 54px)!important;width:calc(100vw - 54px)!important;height:auto!important}#certCarouselWrap .cs-card-image-wrap,#certCarouselWrap .cs-cert-placeholder{height:220px!important;min-height:220px!important}#certCarouselWrap .cs-cert-placeholder span{font-size:4rem!important}#certCarouselWrap .cs-card-content{min-height:auto!important;padding:12px 14px!important}}
 </style>
 
 <style id="social-unique-popup-colors">
