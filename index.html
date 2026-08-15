@@ -2181,6 +2181,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
             border-top: 1px solid rgba(255, 200, 87, 0.04);
             padding-top: 0.7rem;
             margin-top: 0.2rem;
@@ -2224,6 +2226,46 @@
 
         .carousel-card .card-link:hover svg {
             transform: translateX(3px);
+        }
+
+        .carousel-card .card-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .carousel-card .card-github-link {
+            color: #ffc857;
+            text-decoration: none;
+            font-size: 0.6rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.3s;
+            background: rgba(255, 200, 87, 0.04);
+            border: 1px solid rgba(255, 200, 87, 0.06);
+            padding: 5px 16px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+            transform: translateZ(8px);
+        }
+
+        .carousel-card .card-github-link:hover {
+            color: #000;
+            background: #ffc857;
+            border-color: #ffc857;
+            gap: 10px;
+            box-shadow: 0 0 30px rgba(255, 200, 87, 0.1);
+        }
+
+        .carousel-card .card-github-link svg {
+            transition: transform 0.3s;
+            margin-top: -2px;
+        }
+
+        .carousel-card .card-github-link:hover svg {
+            transform: scale(1.15);
         }
 
         /* Mobile Touch Optimizations */
@@ -8809,7 +8851,8 @@ body.wheel-open{
             tags: ["AI", "Python", "EdTech"],
             price: "PROJECT",
             image: "assets/chakrapdf.webp",
-            link: "chakra-smart-ai-study-assistant_fixed.html"
+            link: "chakra-smart-ai-study-assistant_fixed.html",
+            githubLink: "https://github.com/GimhanDisanayaka/pdf_assistant"
         }, {
             // ADDED DEVELOPMENT PROJECT — Custom Interactive Paint Application
             id: 6,
@@ -8822,8 +8865,22 @@ body.wheel-open{
             tags: ["Java", "Computer Graphics", "DDA", "Rasterization"],
             price: "PROJECT",
             image: "assets/Picsart_26-08-12_23-03-00-538.jpg",
-            link: "paint-project.html"
+            link: "paint-project.html",
+            githubLink: "https://github.com/GimhanDisanayaka/Custom-Paint-Application"
         
+        }, {
+            id: 7,
+            title: "Blood Bank Management System",
+            category: "Desktop Application / Healthcare",
+            description: "A desktop system for managing donor records, user accounts and blood-group availability through a secure, data-driven dashboard.",
+            year: "2026",
+            rating: "5.0",
+            date: "2026 · C# / .NET Framework / SQL Server LocalDB",
+            tags: ["C#", "WinForms", "SQL Server", "Healthcare"],
+            price: "PROJECT",
+            image: "assets/blood-bank-dashboard.jpeg",
+            link: "blood-bank-management-system.html",
+            githubLink: "https://github.com/GimhanDisanayaka/Blood_Bank_Management_System"
         }, {
             id: 5,
             title: "Lens & Light",
@@ -9036,6 +9093,13 @@ body.wheel-open{
                 const tagsHtml = project.tags ? project.tags.map(t =>
                     `<span class="card-tag">${t}</span>`).join('') : '';
 
+                const githubButton = project.githubLink ? `
+                            <a href="${project.githubLink}" class="card-github-link" target="_blank" rel="noopener noreferrer">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                GitHub
+                            </a>
+                        ` : '';
+
                 card.innerHTML = `
                     <div class="card-image">
                         <img src="${imgSrc}" alt="${project.title}" loading="lazy">
@@ -9054,10 +9118,13 @@ body.wheel-open{
                         <div class="card-tags">${tagsHtml}</div>
                         <div class="card-footer">
                             <span class="card-date">${project.date || 'Jun 22-26 · Localhost'}</span>
-                            <a href="${project.link || '#'}" class="card-link" ${project.link && !project.link.startsWith('#') ? '' : ''}>
-                                View Project
-                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-                            </a>
+                            <div class="card-actions">
+                                ${githubButton}
+                                <a href="${project.link || '#'}" class="card-link" ${project.link && !project.link.startsWith('#') ? '' : ''}>
+                                    View Project
+                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 `;
